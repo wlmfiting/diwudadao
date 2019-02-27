@@ -1,7 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import home from "./home";
-
+import overseaService from './overseaService'
 Vue.use(Vuex)
 
 let state = {}
@@ -15,7 +15,7 @@ const store = new Vuex.Store({
     mutations,
     getters,
     modules: {
-        home,
+        home,overseaService
     }
 })
 
