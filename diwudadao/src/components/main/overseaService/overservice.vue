@@ -60,7 +60,8 @@ import Bscroll from "better-scroll";
 export default {
     data() {
         return {
-            flag:false
+            flag:false,
+            cat:[]
         }
     },
   components: {
@@ -79,12 +80,13 @@ export default {
     ...Vuex.mapState({
         personList: state => state.overseaService.personList,  
         country: state => state.overseaService.country,
-        cata: state => state.overseaService.cata,
-       
+        cata: state => state.overseaService.cata, 
     }), 
   },
   watch: {
-     
+     cata(){
+      
+     }
   },
   methods: {
     ...Vuex.mapActions({
@@ -99,8 +101,8 @@ export default {
         click: true,
         tap: true
       });
-    
     }
+    
   }
 };
 </script>

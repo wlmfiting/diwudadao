@@ -1,7 +1,7 @@
 <template>
     <div class="success">
         <div class="tittle">
-            <!-- <p>{{case.sucess_title}}</p> -->
+            <!-- <p>{{case.}}</p> -->
             <p>查看更多 ></p>
         </div>
          <!-- <p class="tittle_en">{{case.sucess_en_title}}</p> -->
@@ -10,16 +10,32 @@
 <script>
 import Vuex from 'vuex'
 export default {
+    data () {
+        return {
+            successcase:{}
+        }
+    },
     computed: {
         ...Vuex.mapState({
-        successcase: state => state.overseaService.successcase,
-        
+        case: state => state.overseaService.successcase, 
         }),
+        success(){
+            return this.successcase
+        }
     }, 
-    updated () {
-        console.log(this.case)
-    }
+    mounted() {
+        this.$nextTick(() => {
+        this.successcase=this.case
+        console.log(22,this.case)
+         })
+    },
+    watch: {
+        successcase(old,ne){
+            console.log(3,old,ne)
+        }
+    },
         
+    
 }
 </script>
 <style scoped>
