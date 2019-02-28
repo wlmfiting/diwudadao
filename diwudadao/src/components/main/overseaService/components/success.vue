@@ -11,15 +11,15 @@
 import Vuex from 'vuex'
 export default {
     computed: {
-    ...Vuex.mapState({
-     // bannerList: state => state.overseaService.bannerList,
-       
-    }),
+        ...Vuex.mapState({
+        successcase: state => state.overseaService.successcase,
+        
+        }),
+    }, 
     updated () {
-       console.log()
-      //  console.log(this.case)
+        console.log(this.case)
     }
-    }     
+        
 }
 </script>
 <style scoped>

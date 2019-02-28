@@ -21,7 +21,7 @@ import Swiper from "swiper";
 export default {
   computed: {
     ...Vuex.mapState({
-      bannerList: state => state.overseaService.bannerList
+      bannerList: state => state.overseaService.bannerList,
     })
   },
   updated() {
@@ -36,7 +36,7 @@ export default {
         }
       }); 
     }
-  
+   
   },
   created() {}
 };

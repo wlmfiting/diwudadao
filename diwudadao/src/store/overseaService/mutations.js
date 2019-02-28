@@ -12,7 +12,7 @@ export default {
         state.country= params.hot_country
         state.cata= params.overseas_cata
         state.successcase= params.success_case
-        console.log(state.successcase)
+       // console.log(state.successcase)
        
       
     },

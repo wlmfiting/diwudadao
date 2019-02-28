@@ -43,6 +43,7 @@
             </ul>
         </Person-con>
         <Success-con></Success-con>
+        <Case-con></Case-con>
       </div>
     </div>
   </div>
@@ -53,8 +54,9 @@ import Vuex from "vuex";
 import Banner from "./components/banner";
 import Tab from "./components/tab";
 import Person from "./components/person";
-import Bscroll from "better-scroll";
 import Success from './components/success'
+import Case from "./components/case";
+import Bscroll from "better-scroll";
 export default {
     data() {
         return {
@@ -65,7 +67,8 @@ export default {
     "Banner-con": Banner,
     "Tab-con": Tab,
     "Person-con": Person,
-    'Success-con':Success
+    'Success-con':Success,
+    'Case-con':Case
   },
   created() {
     this.handleOverseaBanner();
@@ -77,7 +80,7 @@ export default {
         personList: state => state.overseaService.personList,  
         country: state => state.overseaService.country,
         cata: state => state.overseaService.cata,
-        //successcase: state => state.overseaService.successcase,
+       
     }), 
   },
   watch: {
@@ -96,7 +99,7 @@ export default {
         click: true,
         tap: true
       });
-      console.log(this.scroll);
+    
     }
   }
 };
