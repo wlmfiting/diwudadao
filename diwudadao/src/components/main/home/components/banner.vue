@@ -49,7 +49,7 @@ export default {
         width: 7px;
         height: 7px;
         border: 1px solid #fff;
-        box-size: border-box;
+        /* box-size: border-box; */
         opacity: 1;
         background-color: rgba(0,0,0,0);
         }
