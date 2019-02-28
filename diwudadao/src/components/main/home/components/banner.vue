@@ -2,7 +2,7 @@
     <div class="banner">
         <div class="swiper-container" ref="homeContainer">
             <div class="swiper-wrapper">
-                <router-link :to="item.slide_url" class="swiper-slide" v-for="(item) in bannerList">
+                <router-link :to="item.slide_url" class="swiper-slide" v-for="(item) in bannerList" :key='item.id'>
                     <img :src="item.silde_original" alt="">
                 </router-link> 
             </div>
