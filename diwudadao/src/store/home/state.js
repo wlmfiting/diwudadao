@@ -3,10 +3,13 @@ export default{
     bannerSlider:[],
     recommend:[],
 
-    content:[],
+    // content:[],
     new_register:[],
     vip_member:[],
-    five_example:null,
+    five_example:{},
     buy_list:[],
-    article_list:[]
+    article_list:[],
+    current_topic:[],
+    flash_sales:[],
+    newly_added:{}
 }

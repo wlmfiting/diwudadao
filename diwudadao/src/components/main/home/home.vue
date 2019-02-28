@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="home" ref="homePage">
     <Input-com/>
     <div class="wrapper homewrapper" ref="homewrapper">
       <div class="content">
@@ -9,7 +9,9 @@
         <Content-com/>
       </div>
     </div>
-    
+    <div class="toTop">
+      <span class="iconfont" @click="handleToTop()">&#xe61c;</span>
+    </div>
   </div>
 </template>
 
@@ -38,10 +40,18 @@ export default {
     ...Vuex.mapActions({
       handleHomeDataButton:"home/handleHomeDataButton",
       handleHomeDateSlider:"home/handleHomeDateSlider"
-    })
+    }),
+    handleToTop(){
+      console.log(document)
+      console.log(this.$root.$el.scrollTop)
+      console.log(this.$root)
+      this.$root.$el.scrollTop = 0;
+    }
   },
   mounted() {
-    let scroll = new BScroll(this.$refs.homewrapper);
+    let scroll = new BScroll(this.$refs.homewrapper,{
+      click:true
+    });
   },
 }
 </script>
@@ -49,8 +59,20 @@ export default {
 <style scoped>
   #home{
     height: 100%;
+    background: #f2f2f2;
   }
   #home>.homewrapper{
     height: 100%;
+  }
+  #home>.toTop{
+    position: fixed;
+    right: .4rem;
+    bottom: 1.3rem;
+    z-index: 100;
+    background: #fff;
+    border-radius: 1.5rem;
+  }
+  #home>.toTop>span{
+    font-size: .8rem;
   }
 </style>
