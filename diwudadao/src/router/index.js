@@ -6,7 +6,7 @@ import OverService from "@/components/main/overseaService/overservice"
 import Store from "@/components/main/store/store"
 import My from "@/components/main/my/my"
 import ErrorHome from "@/components/error/error"
-
+import Country from '@/components/main/overseaService/details/country'
 Vue.use(Router)
 
 export default new Router({
@@ -41,15 +41,21 @@ export default new Router({
       components:(resolve)=>require(["@/components/main/my/my"],resolve)
     },
     {
-      path:"/overService",
+      path:"/overservice",
       name:"overService",
       // component:OverService
-      components:(resolve)=>require(["@/components/main/overseaService/overservice"],resolve)
+      component:(resolve)=>require(["@/components/main/overseaService/overservice"],resolve),
     },
     {
       path:"/error",
       // component:ErrorHome
       components:(resolve)=>require(["@/components/error/error"],resolve)
+    },
+    {
+      path:"/country/:id",
+      name:"country",
+      component:Country,
+      props:true
     }
   ]
 })

@@ -20,22 +20,22 @@ export default {
               scrollX:true,
                click: true,
                 tap: true
-          })
-         
+          })        
         }
     }
 }
 
 </script>
-<style lang="" scoped>
+<style lang="">
     .person{width: 100%;padding: .4rem;margin-top: .2rem;background: #fff;}
     .person .tittle{width: 100%;display: flex;justify-content: space-between;padding-bottom: .5rem;font-size: .3rem;font-weight: 700;}
     .person .tittle>p:nth-of-type(2){color: #333;font-weight: 500;}
     .personcont{display: flex;width: max-content;background:#f2f2f2;}
     .perInfo{width:5.12rem;margin-right:1rem;border-radius: .2rem;overflow: hidden;}
     .perifont{background: #fff;padding: .1rem;line-height: .32rem }
-    .country{width:2.6rem;margin-right:.3rem;background: #fff;border: 1px solid #333}
-    .country>img{width:100%;height: 2rem;}
+    .country{width:2.6rem;margin-right:.3rem;background: #fff;border: 1px solid #333;overflow: hidden;}
+    .country a{width: 2.6rem;height: 100%;display: block;}
+    .countryimg{width: 100%;height: 2rem;}
     .countryfont{line-height: .48rem;padding: .2rem;}
     .countryfont>img{width: .6rem;float: left;}
 
@@ -47,4 +47,5 @@ export default {
     .hosefont{padding: .4rem 0;font: 700 .3rem/1.2 '微软雅黑';text-overflow:ellipsis;white-space:nowrap;overflow: hidden;}
     .hosefont2{color: #999;padding-bottom: .3rem;font-size: .28rem}
     .hosefont2>span{color:cornflowerblue;}
+    .person ul li:last-of-type{margin-right: 0;}
 </style>

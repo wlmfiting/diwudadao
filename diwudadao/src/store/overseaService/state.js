@@ -5,6 +5,7 @@ export default {
     country:[],
     cata:[],
     successcase:{},
-   
+   //详情
+   countryInfo:{}
 
 }

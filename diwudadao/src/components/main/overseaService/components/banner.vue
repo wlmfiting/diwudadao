@@ -11,6 +11,7 @@
       </div>
       <div class="swiper-pagination" ref="overseaList"></div>
     </div>
+   
   </div>
 </template>
 
@@ -36,9 +37,10 @@ export default {
         }
       }); 
     }
-   
   },
-  created() {}
+  mounted () {
+
+  }
 };
 </script>
 
