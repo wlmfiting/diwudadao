@@ -2,7 +2,7 @@
     <div class="banner">
         <div class="swiper-container" ref="homeContainer">
             <div class="swiper-wrapper">
-                <router-link :to="item.slide_url" class="swiper-slide" v-for="(item) in bannerList">
+                <router-link :to="item.slide_url" class="swiper-slide" v-for="(item) in bannerList" :key='item.id'>
                     <img :src="item.silde_original" alt="">
                 </router-link> 
             </div>
@@ -49,7 +49,6 @@ export default {
         width: 7px;
         height: 7px;
         border: 1px solid #fff;
-        /* box-size: border-box; */
         opacity: 1;
         background-color: rgba(0,0,0,0);
         }

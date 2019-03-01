@@ -9,7 +9,6 @@ export default{
         state.recommend = params
     },
     handleDateHomeOtherAds(state,params){
-        console.log(state,params)
         state.new_register = params.new_register;
         state.vip_member = params.vip_member;
         state.five_example = params.five_example;
@@ -18,6 +17,14 @@ export default{
         state.current_topic = params.current_topic;
         state.flash_sales = params.flash_sales;
         state.newly_added = params.newly_added;
-        
+    },
+    handleDateHomeArticalAds(state,params){
+        console.log(state.artical_others_ads,params)
+        // if(JSON.stringify(state.artical_others_ads) == "{}"){
+        //     
+        // }
+        state.artical_others_ads = {...state.artical_others_ads,...params};
+        state.artical_others_ads.ads_info = [...state.artical_others_ads.ads_info,...params.ads_info]
+        state.homePage ++;
     }
 }

@@ -15,5 +15,10 @@ export default{
     async handleDateHomeOtherAds({commit}){
         let data = await handleHome.DateHomeOtherAds();
         commit("handleDateHomeOtherAds",data.data);
+    },
+    async handleDateHomeArticalAds({commit},params){
+        console.log(params)
+        let data = await handleHome.DateHomeArticalAds(params);
+        commit("handleDateHomeArticalAds",data.data)
     }
 }

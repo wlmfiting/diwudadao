@@ -26,30 +26,30 @@ export default new Router({
       path: '/mall',
       name: 'mall',
       // component: Mall
-      components:(resolve)=>require(["@/components/main/mall/mall"],resolve)
+      component:(resolve)=>require(["@/components/main/mall/mall"],resolve)
     },
     {
       path: '/store',
       name: 'store',
       // component: Store
-      components:(resolve)=>require(["@/components/main/store/store"],resolve)
+      component:(resolve)=>require(["@/components/main/store/store"],resolve)
     },
     {
       path:"/my",
       name:"my",
       // component:My
-      components:(resolve)=>require(["@/components/main/my/my"],resolve)
+      component:(resolve)=>require(["@/components/main/my/my"],resolve)
     },
     {
       path:"/overService",
       name:"overService",
       // component:OverService
-      components:(resolve)=>require(["@/components/main/overseaService/overservice"],resolve)
+      component:(resolve)=>require(["@/components/main/overseaService/overservice"],resolve)
     },
     {
       path:"/error",
       // component:ErrorHome
-      components:(resolve)=>require(["@/components/error/error"],resolve)
+      component:(resolve)=>require(["@/components/error/error"],resolve)
     }
   ]
 })
