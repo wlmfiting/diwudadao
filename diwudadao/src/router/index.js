@@ -26,7 +26,7 @@ export default new Router({
       path: '/mall',
       name: 'mall',
       // component: Mall
-      components:(resolve)=>require(["@/components/main/mall/mall"],resolve)
+      component:(resolve)=>require(["@/components/main/mall/mall"],resolve)
     },
     {
       path: '/store',
