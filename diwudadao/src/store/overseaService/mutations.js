@@ -11,9 +11,10 @@ export default {
         state.personList= params.oversea_expert
         state.country= params.hot_country
         state.cata= params.overseas_cata
-        state.successcase= params.success_case
-       // console.log(state.successcase)
-       
-      
+        state.successcase= params.success_case 
     },
+    //详情页 国家
+    handelDataCountry(state,params){
+        state.countryInfo= params
+    }
 }

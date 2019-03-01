@@ -11,6 +11,10 @@ export default{
     async handleOverseaIndex({commit}){
         let data = await oversea.DateOverseaindex(); 
         commit("handleOverseaIndex",data.data);
+    },
+    async handelDataCountry({commit},params){
+        let data = await oversea.DataOverCountry(params);
+        commit('handelDataCountry',data.data)
     }
    
 }

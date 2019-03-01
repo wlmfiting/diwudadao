@@ -6,7 +6,7 @@ import OverService from "@/components/main/overseaService/overservice"
 import Store from "@/components/main/store/store"
 import My from "@/components/main/my/my"
 import ErrorHome from "@/components/error/error"
-
+import Country from '@/components/main/overseaService/details/country'
 Vue.use(Router)
 
 export default new Router({
@@ -26,30 +26,36 @@ export default new Router({
       path: '/mall',
       name: 'mall',
       // component: Mall
-      component:(resolve)=>require(["@/components/main/mall/mall"],resolve)
+      components:(resolve)=>require(["@/components/main/mall/mall"],resolve)
     },
     {
       path: '/store',
       name: 'store',
       // component: Store
-      component:(resolve)=>require(["@/components/main/store/store"],resolve)
+      components:(resolve)=>require(["@/components/main/store/store"],resolve)
     },
     {
       path:"/my",
       name:"my",
       // component:My
-      component:(resolve)=>require(["@/components/main/my/my"],resolve)
+      components:(resolve)=>require(["@/components/main/my/my"],resolve)
     },
     {
-      path:"/overService",
+      path:"/overservice",
       name:"overService",
       // component:OverService
-      component:(resolve)=>require(["@/components/main/overseaService/overservice"],resolve)
+      component:(resolve)=>require(["@/components/main/overseaService/overservice"],resolve),
     },
     {
       path:"/error",
       // component:ErrorHome
-      component:(resolve)=>require(["@/components/error/error"],resolve)
+      components:(resolve)=>require(["@/components/error/error"],resolve)
+    },
+    {
+      path:"/country/:id",
+      name:"country",
+      component:Country,
+      props:true
     }
   ]
 })

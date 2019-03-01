@@ -20,7 +20,7 @@ export default {
               scrollX:true,
                click: true,
                 tap: true
-          })
+          })        
         }
     }
 }

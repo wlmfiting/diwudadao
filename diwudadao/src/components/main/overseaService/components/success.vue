@@ -1,5 +1,5 @@
 <template>
-    <div>
+<div>
     <div class="success">
         <div class="tittle">
             <p>{{email.sucess_title}}</p>
