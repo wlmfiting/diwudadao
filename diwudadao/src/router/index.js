@@ -44,7 +44,7 @@ export default new Router({
       path:"/overService",
       name:"overService",
       // component:OverService
-      component:(resolve)=>require(["@/components/main/overseaService/overservice"],resolve)
+      component:(resolve)=>require(["@/components/main/overseaService/overservice"],resolve),
     },
     {
       path:"/error",
