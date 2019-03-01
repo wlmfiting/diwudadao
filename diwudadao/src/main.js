@@ -7,15 +7,6 @@ import "./common/css/reset.css"
 import "./common/js/flexble"
 import "./assets/iconfont/iconfont.css"
 import store from "./store"
-import 'mint-ui/lib/style.css'
-import { Field } from 'mint-ui'
-
-Vue.config.productionTip = false
-
-
-Vue.component(Field.name, Field)
-
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
