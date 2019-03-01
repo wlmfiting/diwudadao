@@ -15,6 +15,16 @@ export default{
     async handelDataCountry({commit},params){
         let data = await oversea.DataOverCountry(params);
         commit('handelDataCountry',data.data)
-    }
-   
+    },
+    async handelPeoData({commit},params){
+        
+        let data = await oversea.DataOverPeople(params);
+        //console.log(data)
+        commit('handelPeoData',data.data)
+    },
+    async handelprojectData({commit},params){
+        
+        let data = await oversea.DataOverProjec(params);
+        commit('handelprojectData',data.data)
+    },
 }

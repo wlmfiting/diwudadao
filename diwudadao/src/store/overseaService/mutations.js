@@ -16,5 +16,11 @@ export default {
     //详情页 国家
     handelDataCountry(state,params){
         state.countryInfo= params
-    }
+    },
+    handelPeoData(state,params){
+        state.people= params
+    },
+    handelprojectData(state,params){
+        state.project= params
+    },
 }

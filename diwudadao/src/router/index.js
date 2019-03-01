@@ -7,6 +7,8 @@ import Store from "@/components/main/store/store"
 import My from "@/components/main/my/my"
 import ErrorHome from "@/components/error/error"
 import Country from '@/components/main/overseaService/details/country'
+import people from '@/components/main/overseaService/details/people'
+import project from '@/components/main/overseaService/details/project'
 Vue.use(Router)
 
 export default new Router({
@@ -32,13 +34,13 @@ export default new Router({
       path: '/store',
       name: 'store',
       // component: Store
-      components:(resolve)=>require(["@/components/main/store/store"],resolve)
+      component:(resolve)=>require(["@/components/main/store/store"],resolve)
     },
     {
       path:"/my",
       name:"my",
       // component:My
-      components:(resolve)=>require(["@/components/main/my/my"],resolve)
+      component:(resolve)=>require(["@/components/main/my/my"],resolve)
     },
     {
       path:"/overservice",
@@ -49,13 +51,25 @@ export default new Router({
     {
       path:"/error",
       // component:ErrorHome
-      components:(resolve)=>require(["@/components/error/error"],resolve)
+      component:(resolve)=>require(["@/components/error/error"],resolve)
     },
     {
       path:"/country/:id",
       name:"country",
       component:Country,
       props:true
-    }
+    },
+    {
+      path:"/people/:id",
+      name:"people",
+      component:people,
+      props:true
+    },
+    {
+      path:"/project/:id",
+      name:"project",
+      component:project,
+      props:true
+    },
   ]
 })

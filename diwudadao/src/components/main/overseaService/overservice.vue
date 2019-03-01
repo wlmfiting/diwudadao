@@ -10,7 +10,7 @@
                 <p>查看更多 ></p>
             </div>
             <ul class="content personcont"  slot="info">
-                <li v-for="item in personList" class="perInfo">
+                <li v-for="item in personList" class="perInfo" @click="handelroute(item.id)">
                  
                 <img :src="item.expert_home_img" alt>
                 <p class="perifont">{{item.expert_summary}}</p>
@@ -41,7 +41,7 @@
                 </div>
                 <p slot="tittle_en" class="tit_en">{{items.cata_name_en}}</p>
             <ul class="content hosete"  slot="info">
-                <li v-for="item in items.overseas_project" class="hose">
+                <li v-for="item in items.overseas_project" class="hose" @click="handelrouteproject(item.project_id)">
                 <img :src="item.project_img" >
                 <p class="hosefont">{{item.project_title}}</p>
                 <div class="hosefont2">服务费：<span>{{item.mobile_price}}</span></div>
@@ -100,7 +100,13 @@ export default {
       handleOverseaBanner: "overseaService/handleOverseaBanner",
       handleOverseaButton: "overseaService/handleOverseaButton",
       handleOverseaIndex: "overseaService/handleOverseaIndex"
-    })
+    }),
+    handelroute(id){
+      this.$router.push('/people/'+id)
+    },
+    handelrouteproject(id){
+      this.$router.push('/project/'+id)
+    }
   },
   mounted() {
     if (!this.scroll) {
