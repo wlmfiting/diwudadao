@@ -11,8 +11,10 @@
             </div>
             <ul class="content personcont"  slot="info">
                 <li v-for="item in personList" class="perInfo">
+                 
                 <img :src="item.expert_home_img" alt>
                 <p class="perifont">{{item.expert_summary}}</p>
+                 
                 </li>
             </ul>
         </Person-con>
@@ -23,8 +25,12 @@
             </div>
             <ul class="content personcont"  slot="info">
                 <li v-for="item in country" class="country">
-                <img :src="item.banner_m" >
-                <p class="countryfont"><img :src="item.national_flag">{{item.name}}</p>
+                <router-link :to="{name:'country',params:{id:item.c_id}}">
+                   
+                    <img :src="item.banner_m"  class="countryimg">
+                    <p class="countryfont"><img :src="item.national_flag">{{item.name}}</p>
+                    
+                 </router-link>
                 </li>
             </ul>
         </Person-con>
@@ -42,8 +48,7 @@
                 </li>
             </ul>
         </Person-con>
-        <Success-con></Success-con>
-        <Case-con></Case-con>
+        <Success-con v-if="flag" :email='caseList'></Success-con>
       </div>
     </div>
   </div>
@@ -55,7 +60,6 @@ import Banner from "./components/banner";
 import Tab from "./components/tab";
 import Person from "./components/person";
 import Success from './components/success'
-import Case from "./components/case";
 import Bscroll from "better-scroll";
 export default {
     data() {
@@ -69,7 +73,7 @@ export default {
     "Tab-con": Tab,
     "Person-con": Person,
     'Success-con':Success,
-    'Case-con':Case
+    
   },
   created() {
     this.handleOverseaBanner();
@@ -80,12 +84,15 @@ export default {
     ...Vuex.mapState({
         personList: state => state.overseaService.personList,  
         country: state => state.overseaService.country,
-        cata: state => state.overseaService.cata, 
+        cata: state => state.overseaService.cata,
+        caseList: state => state.overseaService.successcase, 
     }), 
   },
   watch: {
-     cata(){
-      
+     caseList(){
+       if(this.caseList){
+         this.flag=true
+       }
      }
   },
   methods: {
@@ -101,8 +108,7 @@ export default {
         click: true,
         tap: true
       });
-    }
-    
+    }  
   }
 };
 </script>
@@ -111,6 +117,7 @@ export default {
 #oversea {
   background: #f2f2f2;
   height: 100%;
+  
 }
 .overseaWrapper {
   height: 100%;
