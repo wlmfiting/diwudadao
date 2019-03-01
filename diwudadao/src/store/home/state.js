@@ -11,5 +11,7 @@ export default{
     article_list:[],
     current_topic:[],
     flash_sales:[],
-    newly_added:{}
+    newly_added:{},
+    artical_others_ads:{},
+    homePage:0,
 }
