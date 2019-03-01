@@ -5,6 +5,10 @@
 		</div>
 		<Swiper/>
 		<Tabbar/>
+<<<<<<< HEAD
+=======
+		<>
+>>>>>>> master
 	</div>
 </template>
 
