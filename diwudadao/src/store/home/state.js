@@ -13,5 +13,5 @@ export default{
     flash_sales:[],
     newly_added:{},
     artical_others_ads:{},
-    homePage:0,
+    homePage:1,
 }

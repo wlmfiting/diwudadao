@@ -19,12 +19,16 @@ export default{
         state.newly_added = params.newly_added;
     },
     handleDateHomeArticalAds(state,params){
-        console.log(state.artical_others_ads,params)
-        // if(JSON.stringify(state.artical_others_ads) == "{}"){
-        //     
-        // }
-        state.artical_others_ads = {...state.artical_others_ads,...params};
-        state.artical_others_ads.ads_info = [...state.artical_others_ads.ads_info,...params.ads_info]
+        if(!state.artical_others_ads.ads_info){
+            state.artical_others_ads = params;
+            
+        }else{
+            state.artical_others_ads = {...state.artical_others_ads,...params};
+            state.artical_others_ads.ads_info = [...state.artical_others_ads.ads_info,...params.ads_info]
+        }
+        
+        console.log(state.artical_others_ads)
+        
         state.homePage ++;
     }
 }

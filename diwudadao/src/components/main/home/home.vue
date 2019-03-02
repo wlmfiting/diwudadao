@@ -7,7 +7,7 @@
         <FunNav-com/>
         <Recommend-com/>
         <Content-com/>
-        <Artical-com :articalList="articlelist"/>
+        <Artical-com :articalList="articlelist" v-if="this.flag1"/>
         <FlashSales-com/>
         <Artical-com :articalList="articalothersads.ads_info"/>
       </div>
@@ -20,13 +20,13 @@
 
 <script>
 import Vuex from "vuex";
-import Input from "./components/input";
-import Banner from "./components/banner";
-import FunNav from "./components/funNav";
-import Recommend from "./components/recommend";
-import Content from "./components/content";
-import Artical from "./components/articallist";
-import FlashSales from "./components/flashSales";
+// import Input from "./components/input";
+// import Banner from "./components/banner";
+// import FunNav from "./components/funNav";
+// import Recommend from "./components/recommend";
+// import Content from "./components/content";
+// import Artical from "./components/articallist";
+// import FlashSales from "./components/flashSales";
 
 import BScroll from "better-scroll";
 export default {
@@ -38,13 +38,15 @@ export default {
     };
   },
   components: {
-    "Input-com": Input,
-    "Banner-com": Banner,
-    "FunNav-com": FunNav,
-    "Recommend-com": Recommend,
-    "Content-com": Content,
-    "Artical-com": Artical,
-    "FlashSales-com": FlashSales
+    "Input-com":resolve => {require(['./components/input.vue'],resolve)},
+    "Input-com": resolve => {require(['./components/input.vue'],resolve)},
+    "Banner-com": resolve => {require(['./components/banner'],resolve)},
+    "FunNav-com": resolve => {require(['./components/funNav.vue'],resolve)},
+    "Recommend-com": resolve => {require(['./components/recommend.vue'],resolve)},
+    "Artical-com": resolve => {require(['./components/articallist.vue'],resolve)},
+    "Content-com": resolve => {require(['./components/content.vue'],resolve)},
+    
+    "FlashSales-com": resolve => {require(['./components/flashSales.vue'],resolve)},
   },
   created() {
     this.handleHomeDataButton();
@@ -65,11 +67,7 @@ export default {
       handleDateHomeArticalAds: "home/handleDateHomeArticalAds"
     }),
     handleToTop() {
-      console.log(document);
-      console.log(this.$root.$el.scrollTop);
-      console.log(this.$root);
-      this.$root.$el.scrollTop = 0;
-      console.log(this.articalothersads);
+      this.onScroll.scrollTo(0, 0, 500)
     }
   },
   watch:{
@@ -77,37 +75,50 @@ export default {
       console.log(newVal,oldVal)
       this.onScroll.refresh();
       this.onScroll.finishPullUp();
+    },
+    articlelist(){
+        if(this.articlelist){
+          console.log(true)
+        this.flag1=true
+        }
+        console.log(200)
+    },
+     articalothersads(){
+        if(this.articalothersads){
+        this.flag2=1
+        }
+        console.log(200)
     }
   },
   mounted() {
     let that = this;
+    console.log(this.articlelist)
     console.log(this)
+    console.log(this.articlelist)
     this.$nextTick(() => {
       this.onScroll = new BScroll(this.$refs.homewrapper, {
         click: true,
         tap:true,
-
         probeType: 2,
         //下拉刷新：可以配置顶部下拉的距离（threshold） 来决定刷新时机以及回弹停留的距离（stop）
         //这个配置用于做上拉加载功能，默认为 false。当设置为 true 或者是一个 Object 的时候，可以开启上拉加载
         pullUpLoad: {
-          threshold: 10
+          threshold: true
         },
         useTransition: false // 防止iphone微信滑动卡顿
       });
       this.onScroll.on("pullingUp", function() {
-          alert('已到最底部');
+        console.log(this)
         this.pullupMsg = '加载中。。。';
         setTimeout(()=>{
-          console.log(this)
           that.handleDateHomeArticalAds({ page: that.homePage });
-            // that.handleDateHomeArticalAds().then((res)=>{
-            //     //恢复文本值
-            //     that.pullupMsg = '加载更多';
-            //     that.scroll.refresh();
-            // })
-        },2000)
+            that.handleDateHomeArticalAds().then((res)=>{
+                //恢复文本值
+                that.pullupMsg = '加载更多';
+            })
+        },3000)
       })
+      this.handleToTop(); // 回到顶部
     });
     
   }
