@@ -3,9 +3,9 @@
 		<div class="header">
 			<Header-com/>
 		</div>
-		<Swiper/>
 		<Tabbar/>
-		<>
+		<Swiper/>
+		<ButtonList/>
 	</div>
 </template>
 
@@ -14,20 +14,24 @@
 	import Header from "./components/header"
 	import Swiper from "./components/banner"
 	import Tabbar from "./components/tabBar"
+	import ButtonList from "./components/buttonList"
 	export default {
 		components: {
 			"Header-com": Header,
 			"Swiper": Swiper,
 			"Tabbar":Tabbar,
+			"ButtonList":ButtonList,
 		},
 		created() {
 			this.handleDateMallButton();
 			this.handleDateMallTabbar();
+			this.handleDateMallButtonList();
 		},
 		methods: {
 			...Vuex.mapActions({
 				handleDateMallButton: "mall/handleDateMallButton",
 				handleDateMallTabbar: "mall/handleDateMallTabbar",
+				handleDateMallButtonList:"mall/handleDateMallButtonList",
 			})
 		},
 	}
