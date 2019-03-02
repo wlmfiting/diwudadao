@@ -31,6 +31,7 @@
 	.tabBar{
 		width:100%;
 		height:.8rem;
+		margin-top:.88rem;
 		background:#fff;
 	}
 	.tabBar>ul{
