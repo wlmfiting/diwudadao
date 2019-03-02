@@ -6,6 +6,8 @@ export default {
     cata:[],
     successcase:{},
    //详情
-   countryInfo:{}
+   countryInfo:{},
+   people:{},
+   project:{}
 
 }

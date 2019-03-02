@@ -7,6 +7,8 @@ import Store from "@/components/main/store/store"
 import My from "@/components/main/my/my"
 import ErrorHome from "@/components/error/error"
 import Country from '@/components/main/overseaService/details/country'
+import people from '@/components/main/overseaService/details/people'
+import project from '@/components/main/overseaService/details/project'
 Vue.use(Router)
 
 export default new Router({
@@ -56,6 +58,18 @@ export default new Router({
       name:"country",
       component:Country,
       props:true
-    }
+    },
+    {
+      path:"/people/:id",
+      name:"people",
+      component:people,
+      props:true
+    },
+    {
+      path:"/project/:id",
+      name:"project",
+      component:project,
+      props:true
+    },
   ]
 })

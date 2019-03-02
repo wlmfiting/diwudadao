@@ -17,6 +17,13 @@ module.exports = {
         pathRewrite:{
           "^/api":""
         }
+      },
+      "/dao":{
+        target:"http://10.9.24.215:3000",
+        changeOrigin:true,
+        pathRewrite:{
+          "^/dao":""
+        }
       }
     },
 

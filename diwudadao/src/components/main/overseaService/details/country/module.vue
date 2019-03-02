@@ -17,7 +17,6 @@
             </div>
         </div>
     </div>      
-    <p>{{email}}</p>
     </div>
 </template>
 

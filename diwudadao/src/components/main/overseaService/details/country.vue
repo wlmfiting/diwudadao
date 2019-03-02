@@ -4,8 +4,13 @@
             <div class="content">
                 <Info-con></Info-con>
                 <Module-con :email='countryInfo.project_info'></Module-con>
-                <Module-con :email='countryInfo.project_info'></Module-con>
-                <Success :email='countryInfo.country_success_case'></Success>
+                <Success :email='countryInfo.country_success_case'>
+                    <p slot="title">咨询-案例</p>
+                </Success>
+                <Success :email='countryInfo.country_advice'>
+                    <p slot="title">政策-热点</p>
+                </Success>
+                <Question :email='countryInfo.interaction_answer'></Question>
             </div>
         </div>
     </div>
@@ -15,6 +20,7 @@ import Vuex from "vuex";
 import Info from './country/info.vue'
 import Module from './country/module.vue'
 import Success from './country/case.vue'
+import Question from './country/question.vue'
 import Bscroll from "better-scroll";
 export default {
     computed: {
@@ -25,7 +31,8 @@ export default {
     components:{
         'Info-con':Info,
         'Module-con':Module,
-        'Success':Success
+        'Success':Success,
+        'Question':Question
     },
     props:{
         id:Number
