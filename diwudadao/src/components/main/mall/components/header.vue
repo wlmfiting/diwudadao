@@ -34,6 +34,7 @@ export default {
         justify-content: center;
         align-items: center;
         margin: 0 auto;
+        background: black;
     }
     .search{
         width: max-content;
