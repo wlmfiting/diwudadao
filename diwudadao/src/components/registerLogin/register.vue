@@ -1,41 +1,47 @@
 <template>
-  <div class="login">
+  <div class="register" id="register">
     <div class="top">
       <div class="return" @click="handleReturn()">
         <img src="../../assets/img/registerlogin/return.png" alt>
       </div>
       <h4>用户注册</h4>
     </div>
-    <div class="content">
+    <div class="content" id="content">
       <div class="username-box input-box">
-        <mt-field placeholder="请输入用户名" state="success" style="text" class="username" v-model="username"></mt-field>
+        <mt-field placeholder="请输入用户名（至少输入四位，包括数字、字母、下划线）" type="text"  :state="stateuser" class="username" v-model="username" @blur.native.capture="userBlur($event)" width="90%"></mt-field>
       </div>
       <div class="pwd-style input-box">
-        <mt-field placeholder="请输入密码" state="success" type="password" v-model="pwd"></mt-field>
-        <span class="iconfont look111" @click="handleLookChange($event)">&#xe7b5;</span>
+        <mt-field placeholder="请输入密码（只能输入四位，包括数字、字母、下划线）" :type="type"  :state="statepwd" v-model="pwd" ref="pwd" @blur.native.capture="pwdBlur" class="pwd"></mt-field>
+        <span class="iconfont look" @click="handleLookChange($event)">&#xe7b5;</span>
       </div>
-      <span>1111111</span>
-      
-      <div>111111</div>
-      <!-- <div @click="handleLogin()" ref="lognButton" :class="[{'loginButton':index == 0},'yeloginButton','commonLoginButton']">登录</div> -->
+      <div @click="handleRegisterClick()" ref="registerButton" :class="[{'registerButton':index == 0},'yeRegisterButton','commonRegisterButton']">注册</div>
       <div class="others">
-        <span @click="handleForgetPwd()">忘记密码？</span>
-        <span @click="handleToRegister()">用户注册</span>
+        <span @click="handleToRegister()">已注册过？请登录~</span>
       </div>
     </div>
+    <!-- 弹出框 -->
+    <mt-popup v-model="flag" position="top" popup-transition="popup-fade">注册成功</mt-popup>
   </div>
 </template>
 
 <script>
 import { Field } from "mint-ui";
+
 import "mint-ui/";
+import Vuex from "vuex"
+import { Popup } from 'mint-ui';
+import axios from "axios"
 export default {
   data() {
     return {
       username: "",
       pwd: "",
       index:0,
-      look:false
+      type:"password",
+      look:false,
+      flag:false,  //是否弹出框弹出
+      stateuser:"",   //判断input状态
+      statepwd:""
     };
   },
   watch: {
@@ -54,42 +60,73 @@ export default {
         }
     }
   },
+  computed: {
+    ...Vuex.mapState({
+      regloginMsg:state=>state.home.regloginMsg
+    })
+  },
   methods: {
+    userBlur(){
+      let userReg = /^[0-9a-zA-Z_]{4,}$/g;
+      if(userReg.test(this.username)){
+        this.stateuser = "success";
+      }else{
+        this.stateuser = "error";
+      }
+    },
+    pwdBlur(){
+      let pwdReg = /^[0-9a-zA-Z_]{6}$/g;
+      if(pwdReg.test(this.pwd)){
+        this.statepwd = "success";
+      }else{
+        this.statepwd = "error";
+      }
+    },
     handleReturn() {
       this.$router.push("/home");
     },
-    handleForgetPwd() {
-        this.$router.push("/my/forgetpwd")
-    },
     handleToRegister() {
-        this.$router.push("/my/register")
+      console.log(this)
+        this.$router.push("/login")
     },
     handleLookChange(e){
-        alert(1)
-        this.look = !this.look;
-        console.log(1)
-        if(this.look){
-            console.log(e);
+        this.typeBool = !this.typeBool;
+        if(this.typeBool){
             e.target.innerHTML = "&#xe661;"
+            this.type = "text"
         }else{
-            e.target.innerHTML = ";"
+            e.target.innerHTML = "&#xe7b5;"
+             this.type = "password";
         }
     },
-    handleLogin() {
-        
+    ...Vuex.mapActions({
+      handleHomeRegister:"home/handleHomeRegister"
+    }),
+    async handleRegisterClick() {
+      if(this.index){
+      await this.handleHomeRegister({uname:this.username,pword:this.pwd});
+      if(this.regloginMsg.status){
+          this.flag = true;
+          setTimeout(()=>{
+            this.$router.push("/login")
+          },500)
+        }else{
+          this.flag = false;
+        }
+      }
     },
   }
 };
 </script>
 
 <style lang="" scoped>
-.login {
+.register {
   width: 100%;
   height: 100%;
   background: #fff;
   font-family: \\9ed1\4f53;
 }
-.login > .top {
+.register > .top {
   width: 100%;
   height: 0.88rem;
   display: flex;
@@ -97,63 +134,54 @@ export default {
   align-items: center;
   flex-wrap: nowrap;
 }
-.login > .top > .return {
+.register > .top > .return {
   position: absolute;
   left: 0.2rem;
   top: 0.2rem;
 }
-.login > .top > h4 {
+.register > .top > h4 {
   vertical-align: baseline;
   text-align: center;
   font-weight: normal;
   font-size: 0.32rem;
   color: #333;
 }
-.login > .content {
+.register > .content {
   border-top: 0.01rem solid #999;
   padding-top: 0.96rem;
 }
 
-.login > .content > .input-box {
+.register > .content > .input-box {
   height: 0.8rem;
   margin: 0 0.8rem;
   position: relative;
   border-bottom: 1px solid rgb(134, 129, 129);
 }
-.login > .content > .input-box > input {
+.register > .content > .input-box > input {
   border: 0;
   position: absolute;
   bottom: 0.1rem;
   left: 0;
   font-size: 0.32rem;
 }
-/*     
-    .username{
-        position: absolute;
-        left: 0;
-        top: .1rem;
-        display: block;
-        width: 100%;
-        height: 100%;
-        border: 0;
-        font-size: .32rem !important;
-        color: #666;
-        background: transparent;
-    } */
-
-.login > .content > .pwd-style {
+#register>#content>.input-box>.mint-field{
+  font-size: .3rem;
+  height:100%;
+  width: 100%;
+} 
+.register > .content > .pwd-style {
   padding-top: 2.6%;
   position: relative;
   display: flex;
   align-items: center;
 }
-.login > .content > .input-box > .iconfont {
+.register > .content > .input-box > .iconfont {
   position: absolute;
   right: 0;
   font-size: 0.44rem;
   color: #666;
 }
-.login > .content >.commonLoginButton{
+.register > .content >.commonRegisterButton{
     margin: 0 0.8rem;
     margin-top: 8%;
     height: 0.8rem;
@@ -164,11 +192,11 @@ export default {
     justify-content: center;
     align-items: center;
 }
-.login > .content > .loginButton {
+.register > .content > .registerButton {
   background: #ccc;
   
 }
-.login > .content > .others {
+.register > .content > .others {
   margin: 0.4rem 0.8rem;
   display: flex;
   justify-content: space-between;
@@ -179,13 +207,13 @@ export default {
   height: 100%;
   display: flex;
 }
-.mint-cell-wrapper {
-  font-size: 0.3rem !important ;
-}
-.mint-field-core {
-  font-size: 0.3rem !important;
-}
-.yeloginButton{
+.yeRegisterButton{
     background: #c1a166;
+}
+.mint-popup{
+  padding: .3rem .8rem;
+  background: #fff;
+  color: green;
+  font-size: .3rem;
 }
 </style>

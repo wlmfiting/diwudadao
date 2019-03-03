@@ -14,4 +14,5 @@ export default{
     newly_added:{},
     artical_others_ads:{},
     homePage:1,
+    regloginMsg:{}
 }

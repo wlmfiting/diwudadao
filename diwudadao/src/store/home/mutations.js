@@ -26,9 +26,12 @@ export default{
             state.artical_others_ads = {...state.artical_others_ads,...params};
             state.artical_others_ads.ads_info = [...state.artical_others_ads.ads_info,...params.ads_info]
         }
-        
-        console.log(state.artical_others_ads)
-        
         state.homePage ++;
+    },
+    handleRegister(state,params){
+        state.regloginMsg = params;
+    },
+    handleHomeLogin(state,params){
+        state.regloginMsg = params;
     }
 }
