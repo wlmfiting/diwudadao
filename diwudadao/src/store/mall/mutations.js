@@ -10,5 +10,6 @@ export default{
     },
     handleDateMallFlag(state,data){
     	state.mallFlag = data;
-    }
+    },
+    
 }

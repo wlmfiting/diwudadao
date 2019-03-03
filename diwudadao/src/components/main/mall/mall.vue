@@ -9,7 +9,6 @@
 				<Swiper/>
 				<ButtonList/>
 				<Flag/>
-				<Flag/>
 			</div>
 		</div>
 	</div>
