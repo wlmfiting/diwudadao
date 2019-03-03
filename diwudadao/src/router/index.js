@@ -6,6 +6,7 @@ import project from '@/components/main/overseaService/details/project'
 import Register from "@/components/registerLogin/register"
 import Login from "@/components/registerLogin/login"
 import Cart from "@/components/cart/cart"
+import goodinfo from '@/components/main/goodshop/goodinfo'
 Vue.use(Router)
 
 export default new Router({
@@ -82,6 +83,12 @@ export default new Router({
       path:"/error",
       // component:ErrorHome
       component:(resolve)=>require(["@/components/error/error"],resolve)
+    },
+    {
+      path:"/goodinfo/:id",
+      name:"goodinfo",
+      component:goodinfo,
+      props:true
     },
   ]
 })
