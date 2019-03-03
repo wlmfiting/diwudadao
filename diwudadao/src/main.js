@@ -18,13 +18,10 @@ Vue.use(VueLazyload, {
 })
 // import "mint-ui"
 import 'mint-ui/lib/style.css'
-import { Field } from 'mint-ui'
-
+import MintUi from 'mint-ui'
 Vue.config.productionTip = false
 
-
-Vue.component(Field.name, Field)
-
+Vue.use(MintUi);
 
 /* eslint-disable no-new */
 new Vue({

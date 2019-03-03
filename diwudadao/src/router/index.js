@@ -1,14 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Home from '@/components/main/home/home'
-// import Mall from "@/components/main/mall/mall"
-import OverService from "@/components/main/overseaService/overservice"
-import Store from "@/components/main/store/store"
-import My from "@/components/main/my/my"
-import ErrorHome from "@/components/error/error"
 import Country from '@/components/main/overseaService/details/country'
 import people from '@/components/main/overseaService/details/people'
 import project from '@/components/main/overseaService/details/project'
+import Register from "@/components/registerLogin/register"
+import Login from "@/components/registerLogin/login"
+import Cart from "@/components/cart/cart"
 Vue.use(Router)
 
 export default new Router({
@@ -49,9 +46,19 @@ export default new Router({
       component:(resolve)=>require(["@/components/main/overseaService/overservice"],resolve)
     },
     {
-      path:"/error",
-      // component:ErrorHome
-      component:(resolve)=>require(["@/components/error/error"],resolve)
+      path:"/cart",
+      name:"cart",
+      component:Cart
+    },
+    {
+      path:"/register",
+      name:"register",
+      component:Register
+    },
+    {
+      path:"/login",
+      name:"login",
+      component:Login
     },
     {
       path:"/country/:id",
@@ -70,6 +77,11 @@ export default new Router({
       name:"project",
       component:project,
       props:true
+    },
+    {
+      path:"/error",
+      // component:ErrorHome
+      component:(resolve)=>require(["@/components/error/error"],resolve)
     },
   ]
 })

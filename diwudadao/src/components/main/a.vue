@@ -4,7 +4,7 @@
       <div class="return" @click="handleReturn()">
         <img src="../../assets/img/registerlogin/return.png" alt>
       </div>
-      <h4>登录第五大道</h4>
+      <h4>注册账号</h4>
     </div>
     <div class="content" id="content">
       <div class="username-box input-box">
@@ -14,21 +14,17 @@
         <mt-field placeholder="请输入密码" :type="type"  state="" v-model="pwd" ref="pwd" class="pwd"></mt-field>
         <span class="iconfont look" @click="handleLookChange($event)">&#xe7b5;</span>
       </div>
-      <div @click="handleLogin()" ref="lognButton" :class="[{'loginButton':index == 0},'yeloginButton','commonLoginButton']">登录</div>
+      <div @click="handleLogin()" ref="lognButton" :class="[{'loginButton':index == 0},'yeloginButton','commonLoginButton']">注册</div>
       <div class="others">
-        <span @click="handleForgetPwd()">忘记密码？</span>
-        <span @click="handleToRegister()">用户注册</span>
+        <span @click="handleToLogin()">已存在账号？请登录</span>
       </div>
     </div>
-     <!-- 弹出框 -->
-    <mt-popup v-model="flag" position="top" popup-transition="popup-fade">登录失败</mt-popup>
   </div>
 </template>
 
 <script>
 import { Field } from "mint-ui";
 import "mint-ui/";
-import Vuex from "vuex"
 export default {
   data() {
     return {
@@ -36,8 +32,7 @@ export default {
       pwd: "",
       index:0,
       type:"password",
-      typeBool:true,
-       flag:false,  //是否弹出框弹出
+      typeBool:true
     };
   },
   watch: {
@@ -56,11 +51,7 @@ export default {
         }
     },
   },
-  computed: {
-    ...Vuex.mapState({
-      regloginMsg:state=>state.home.regloginMsg
-    })
-  } , 
+    
   methods: {
     handleReturn() {
       this.$router.push("/home");
@@ -68,8 +59,8 @@ export default {
     handleForgetPwd() {
         this.$router.push("/login/forgetpwd")
     },
-    handleToRegister() {
-        this.$router.push("/register")
+    handleToLogin() {
+        this.$router.push("/login")
     },
      handleLookChange(e){   //改变input输入类型
         this.typeBool = !this.typeBool;
@@ -81,20 +72,9 @@ export default {
              this.type = "password";
         }
     },
-    ...Vuex.mapActions({
-      handleHomeLogin:"home/handleHomeLogin"
-    }),
-    async handleLogin() {
-      await this.handleHomeLogin({uname:this.username,pword:this.pwd});
-        if(this.regloginMsg.status){
-          setTimeout(()=>{
-            this.$router.push("/my")
-          },500)
-        }else{
-          this.flag = true;
-        }
-      
-    }
+    handleLogin() {
+
+    },
   }
 };
 
@@ -195,10 +175,4 @@ export default {
 .yeloginButton{
     background: #c1a166;
 } 
-.mint-popup{
-  padding: .3rem .8rem;
-  background: #fff;
-  color: green;
-  font-size: .3rem;
-}
 </style>
