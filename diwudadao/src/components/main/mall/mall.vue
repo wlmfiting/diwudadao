@@ -4,8 +4,15 @@
 			<Header-com/>
 		</div>
 		<Tabbar/>
+<<<<<<< HEAD
 		<Swiper/>
 		<ButtonList/>
+=======
+<<<<<<< HEAD
+=======
+		<>
+>>>>>>> master
+>>>>>>> a64321e36a98abec6f8bb5314bc1b7b66d0e4c82
 	</div>
 </template>
 
