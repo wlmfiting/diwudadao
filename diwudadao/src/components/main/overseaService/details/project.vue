@@ -7,10 +7,7 @@
                 <p>{{project.project_info.flag}}:<span>{{project.project_info.discount_price}}</span></p>
                 <p>{{project.project_info.label[0]}}</p>
             </div>
-            <div></div>
         </div>
-  <p>{{project}}</p>
- 
     </div>
 </template>
 <script>
