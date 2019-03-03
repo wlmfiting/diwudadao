@@ -30,9 +30,9 @@
             <div class="price-num">
               <p class="price">￥1899</p>
               <div class="num-box">
-                <span>-</span>
+                <span @click="handleReduce()">-</span>
                 <span class="num">1</span>
-                <span>+</span>
+                <span @click="handleAdd()">+</span>
               </div>
             </div>
           </div>
@@ -62,17 +62,21 @@ export default {
     data () {
         return {
             count:1,
-            value:[1]
+            value:[1],
+            num:-1
         }
     },
     // created() {
     //   this.getCookieGoods();
     // },
-    // methods: {
-    //   getCookieGoods(){
+    methods: {
+      getCookieGoods(){
 
-    //   }
-    // }
+      },
+      handleReduce(){
+
+      }
+    }
 };
 </script>
 
@@ -215,6 +219,7 @@ export default {
     }
     .footer{
       background: #fff;
+      width: 100%;
       height: 1.2rem;
       border-top: .01rem solid #999;
       position: absolute;
