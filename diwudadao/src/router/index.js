@@ -9,6 +9,7 @@ import ErrorHome from "@/components/error/error"
 import Country from '@/components/main/overseaService/details/country'
 import people from '@/components/main/overseaService/details/people'
 import project from '@/components/main/overseaService/details/project'
+import goodinfo from '@/components/main/goodshop/goodinfo'
 Vue.use(Router)
 
 export default new Router({
@@ -69,6 +70,12 @@ export default new Router({
       path:"/project/:id",
       name:"project",
       component:project,
+      props:true
+    },
+    {
+      path:"/goodinfo/:id",
+      name:"goodinfo",
+      component:goodinfo,
       props:true
     },
   ]

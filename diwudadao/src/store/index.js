@@ -3,6 +3,7 @@ import Vuex from "vuex"
 import home from "./home";
 import overseaService from './overseaService';
 import mall from "./mall";
+import goods from './goods'
 Vue.use(Vuex)
 
 let state = {}
@@ -16,7 +17,7 @@ const store = new Vuex.Store({
     mutations,
     getters,
     modules: {
-        home,overseaService,mall
+        home,overseaService,mall,goods
     }
 })
 
