@@ -26,6 +26,7 @@
 
 <script>
 import Vuex from "vuex"
+import obj from "../../../../common/js/common/pathchange.js"
 export default {
     computed: {
     ...Vuex.mapState({

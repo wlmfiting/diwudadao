@@ -33,5 +33,8 @@ export default{
     },
     handleHomeLogin(state,params){
         state.regloginMsg = params;
+    },
+    handleHomeGoodsList(state,params){
+        state.goodsList = params.data;
     }
 }

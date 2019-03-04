@@ -80,15 +80,26 @@ export default new Router({
       props:true
     },
     {
-      path:"/error",
-      // component:ErrorHome
-      component:(resolve)=>require(["@/components/error/error"],resolve)
-    },
-    {
       path:"/goodinfo/:id",
       name:"goodinfo",
       component:goodinfo,
       props:true
     },
+    {
+      path:"/brand/detail/:id",
+      name:"brandlist",
+      component:(resolve)=>require(["@/components/main/goodslist/goodslist"],resolve),
+      props:true
+    },
+
+
+
+    //网址错误的报错信息
+    {
+      path:"**",
+      // component:ErrorHome
+      component:(resolve)=>require(["@/components/error/error"],resolve)
+    },
+    
   ]
 })

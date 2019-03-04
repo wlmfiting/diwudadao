@@ -27,5 +27,10 @@ export default{
     async handleHomeLogin({commit},params){
         let data = await handleHome.DateLogin(params);
         commit("handleHomeLogin",data)
+    },
+    async handleHomeGoodsList({commit},params){
+        let data = await handleHome.DateGoodsList(params);
+        console.log(data)
+        commit("handleHomeGoodsList",data)
     }
 }

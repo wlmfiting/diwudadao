@@ -7,6 +7,7 @@ const DateHomeOtherAds = (params) =>http("get","/api/index/other_advert",params)
 const DateHomeArticalAds = (params) =>http("get","/api/index/article_list_ads",params);
 const DateRegister = (params) =>http("get","/dao/find/dao",params);
 const DateLogin = (params) =>http("get","/dao/find/da",params);
+const DateGoodsList = (params)=>http("get","/api/good/brand_detail",params)
 
 export default{
     DateHomeButton,
@@ -15,5 +16,6 @@ export default{
     DateHomeOtherAds,
     DateHomeArticalAds,
     DateRegister,
-    DateLogin
+    DateLogin,
+    DateGoodsList,
 }

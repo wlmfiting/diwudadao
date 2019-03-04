@@ -2,9 +2,9 @@
     <div class="gglist">
        <div class="gglist-four">
            <div v-for="(item) in list">
-                <router-link :to="item.ad_link">
+                <a @click="handleChangePathTo(item.ad_link,'cata_id=0')">
                     <img :src="item.ad_code" :alt="item.ad_name">
-                </router-link>
+                </a>
             </div>
        </div>
          <slot></slot>
@@ -13,6 +13,7 @@
 
 <script>
 import Vuex from "vuex"
+import obj from "../../../../common/js/common/pathchange.js"
 export default {
     created() {
         this.handleDateHomeRecommend();
@@ -25,7 +26,14 @@ export default {
     methods: {
         ...Vuex.mapActions({
             handleDateHomeRecommend:"home/handleDateHomeRecommend"
-        })
+            
+        }),
+        handleChangePathTo(link, params) {
+            let nlink = link.replace(/^(http:\/\/m\.5lux\.com)|(http:\/\/www\.5lux\.com)/, "/api");
+            let newlink = nlink.match(/[0-9]+$/)
+            let id = newlink[0];
+            this.$router.push("/brand/detail/"+id+"?"+params);
+        },
     }
 }
 </script>

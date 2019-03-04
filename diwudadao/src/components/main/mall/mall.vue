@@ -12,9 +12,6 @@
 				<Flag/>
 			</div>
 		</div>
-		<Tabbar/>
-		<Swiper/>
-		<ButtonList/>
 	</div>
 </template>
 

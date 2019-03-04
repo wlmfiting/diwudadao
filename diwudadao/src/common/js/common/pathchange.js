@@ -1,10 +1,12 @@
 //更改数据路径   替换成localhost:8080
-const handleClickTo = (link, id,that)=> {  
+const handleClickTo = (link, params,that)=> {  
     //   http://m.5lux.com/promote/special/3098  http://www.5lux.com/flagship/goods/140
-    let newlink = link.replace(/(http:\/\/m\.5lux\.com)/, "/api");
-    console.log(this)
-    if (id) {
-      return that.$router.push(newlink + id);
+    ///http://www.5lux.com/brand/detail/436cata_id=0
+    let newlink = link.replace(/^(http:\/\/m\.5lux\.com)|(http:\/\/www\.5lux\.com)/, "/api");
+    if (params) {
+      console.log(newlink + "?" + params)
+      return that.$router.push(newlink + "?" + params);
+     
     } else {
       return that.$router.push(newlink);
     }
