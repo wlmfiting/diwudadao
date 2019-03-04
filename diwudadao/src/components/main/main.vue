@@ -1,7 +1,7 @@
 <template>
     <div id="main">
         <router-view/>
-        <Footer-com/>
+        <Footer-com v-if="!this.$route.meta.footerflag"/>
     </div>
 </template>
 
@@ -10,6 +10,9 @@ import Footer from "../common/footer"
 export default {
     components:{
         "Footer-com":Footer
+    },
+    created () {
+        
     }
 }
 </script>

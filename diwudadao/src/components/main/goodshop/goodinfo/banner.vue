@@ -34,7 +34,7 @@ export default {
 }
 </script>
 <style lang="" scoped>
-    .banner{width: 100%;height: 7rem;position: relative;background: #fff;}
-    .swiperimg{height: 7rem;margin: 0 auto;}
+    .banner{width: 100%;height: 7.29rem;position: relative;background: #fff;}
+    .swiperimg{height: 7.29rem;margin: 0 auto;}
     .swiper-p{padding: .4rem;bottom: .2rem;background-image:-webkit-gradient(linear, 0 0, 0 100%, from(transparent), to(rgba(0, 0, 0, 0.5))) }
 </style>

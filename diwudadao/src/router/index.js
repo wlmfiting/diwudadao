@@ -7,9 +7,10 @@ import Register from "@/components/registerLogin/register"
 import Login from "@/components/registerLogin/login"
 import Cart from "@/components/cart/cart"
 import goodinfo from '@/components/main/goodshop/goodinfo'
+
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path:"/",
@@ -83,7 +84,10 @@ export default new Router({
       path:"/goodinfo/:id",
       name:"goodinfo",
       component:goodinfo,
-      props:true
+      props:true,
+      meta:{
+        footerflag:true
+      }
     },
     {
       path:"/brand/detail/:id",
@@ -103,3 +107,13 @@ export default new Router({
     
   ]
 })
+
+router.beforeEach((to,from,next)=>{
+  
+      next()
+   
+    
+    
+  })
+
+  export default router
