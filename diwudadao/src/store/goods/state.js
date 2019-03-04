@@ -6,6 +6,10 @@ export default {
 	goodsment:'',
 	goodstogo1:[],
 	goodstogo2:[],
-	goodstogo3:[],
 	goodstogo4:{},
+	goodAll:[],
+	goodsparaarr:[],
+	goodsImg:'',
+	goodsto0:{},
+	goodsto1:{}
 }
