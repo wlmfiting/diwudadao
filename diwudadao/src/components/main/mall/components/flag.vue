@@ -10,7 +10,7 @@
 					<div class="xiaotu">
 						<div v-for="(its,indexs) in item.store_infos" class="info">
 							<img :src="its.store_thumb" alt="" />
-							<p class="p_text1">{{its.store_title}}</p>
+							<!--<p class="p_text1">{{its.store_title}}</p>-->
 						</div>
 					</div>
 				</div>
