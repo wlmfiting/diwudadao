@@ -141,21 +141,33 @@
 				<span class="line"></span>	
 			</div>			
 		</div>
-		<div class="adv_fir">
-			<a href="http://m.5lux.com/promote/special/4691">
-				<img src="http://img550.5lux.com.cn/2019/03/05/uv/155176663464_750x422.jpg" alt="" />
-			</a>
-		</div>
 		
 		
-		<!--<div class="tabBar wrapper" ref="tabBar" >
+		
+		<!--<div class="tabBar wrapper" ref="tabBar">
 			<ul class="content" >
-				<li v-for="(item4,index) in list4">
+				<li >
 					<p>{{item4}}</p>
-					<img :src="item4.list" alt="" />
+					<img :src="item4.ad_top.ad_code" alt="" />
+					<div>
+						<img v-for="(prop,num) in item4.product_info" src="" alt="" />
+					</div>
 				</li>
 			</ul>
 		</div>-->
+		
+		<div v-for="(item4,index) in productInfo" class="daxiao">
+			<img :src="item4.ad_top.ad_code" alt="" class="datu"/>
+			<div class="tabBar wrapper" ref="tabBar">
+				<ul class="content">
+					<li v-for="(prop,num) in item4.product_info">
+						<img :src="prop.product_thumb" alt="" />
+						<p>{{prop.ad_title}}</p>
+						<p>{{prop.ad_subtitle}}</p>
+					</li>
+				</ul>
+			</div>
+		</div>
 		
 	</div>
 	
@@ -170,6 +182,7 @@ export default {
 			list1: [],
 			list2: [],
 			list3: [],
+			productInfo:[]
 			//				list4:[],
 //			list4:[],
 		}
@@ -194,16 +207,27 @@ export default {
 			top5flag: state => state.mall.top5flag,
 			fashion_guide: state => state.mall.fashion_guide,
 			product_info :state => state.mall.product_info,
+			
 		})
+	},
+	watch:{
+		product_info(val){
+			this.productInfo = val;
+			console.log(this.productInfo);
+			console.log(this.productInfo[0].product_info)
+		}
 	},
 	//监听下数据变化 下面用下判断的方法    其实用下延时器也可以
 		updated(){
+			console.log(this.$refs);
 //			if(!this.scroll){
-//				this.scroll = new BScroll(this.$refs.tabBar,{
-//					scrollX:true
-//				})
-//			}
-			
+	for(var i =0;i<this.$refs.tabBar.length;i++){
+		this.scroll = new BScroll(this.$refs.tabBar[i],{
+					scrollX:true
+				})
+	}
+				
+//			}			
 		},
 }
 
@@ -276,9 +300,26 @@ export default {
 .box>.zhinan {
 	margin-top: .3rem;
 }
-.box>.tabBar{
+.box>.daxiao>.datu{
 	width:100%;
-	height:3rem;
-	background:red;
+	height:4.22rem;
+}
+.box>.daxiao{
+	width:100%;
+	height:8rem;
+}
+.box>.daxiao>.tabBar{
+	width:100%;
+	height:3.78rem;
+}
+.box>.daxiao>.tabBar>ul{
+
+	height:100%;
+	margin-top:-.9rem;
+	flex-wrap:nowrap;
+}
+.box>.daxiao>.tabBar>ul>li>img{
+	width:2.2rem;
+	height:2.8rem;
 }
 </style>
