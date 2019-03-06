@@ -50,17 +50,26 @@ const router = new Router({
     {
       path:"/cart",
       name:"cart",
-      component:Cart
+      component:Cart,
+      meta:{
+        footerflag:true
+      }
     },
     {
       path:"/register",
       name:"register",
-      component:Register
+      component:Register,
+      meta:{
+        footerflag:true
+      }
     },
     {
       path:"/login",
       name:"login",
-      component:Login
+      component:Login,
+      meta:{
+        footerflag:true
+      }
     },
     {
       path:"/country/:id",
@@ -93,7 +102,10 @@ const router = new Router({
       path:"/brand/detail/:id",
       name:"brandlist",
       component:(resolve)=>require(["@/components/main/goodslist/goodslist"],resolve),
-      props:true
+      props:true,
+      meta:{
+        footerflag:true
+      }
     },
 
 
@@ -108,12 +120,5 @@ const router = new Router({
   ]
 })
 
-router.beforeEach((to,from,next)=>{
-  
-      next()
-   
-    
-    
-  })
 
   export default router

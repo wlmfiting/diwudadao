@@ -12,10 +12,11 @@
           <span>综合</span>
           <i class="iconfont">&#xe601;</i>
         </div>
-        <div class="classify item">
+        <div class="classify item"  @click="handleClassify()">
           <span>分类</span>
         </div>
-        <div class="filter item">
+        <Classify-com v-if="flag"/>
+        <div class="filter item"  @click="handleClassify()">
           <span>筛选</span>
           <i class="iconfont">&#xe73a;</i>
         </div>
@@ -26,21 +27,34 @@
 
 <script>
 import Vuex from "vuex";
+import Classify from "./right"
 export default {
   props: ["name"],
+  data() {
+    return {
+      flag:false
+    };
+  },
+  components:{
+    "Classify-com":Classify
+  },
   methods: {
     handleBack() {
       //返回按钮
       this.$router.back();
+    },
+    handleClick() {},
+    handleClassify(){
+      this.flag = true;
     }
   }
 };
 </script>
 
 <style lang="" scoped>
-.header{
-    width: 100%;
-    height: 1.68rem;
+.header {
+  width: 100%;
+  height: 1.68rem;
 }
 .header-box {
   width: 100%;
@@ -50,25 +64,25 @@ export default {
   background: #fff;
   z-index: 100;
 }
-.header>.header-box > .title {
+.header > .header-box > .title {
   width: 100%;
   text-align: center;
   line-height: 0.88rem;
   font-family: \\9ed1\4f53;
   font-size: 0.32rem;
 }
-.header>.header-box > .title > .back {
+.header > .header-box > .title > .back {
   position: absolute;
   left: 0.4rem;
   top: 0.24rem;
   width: 0.44rem;
   height: 0.44rem;
 }
-.header>.header-box > .title > .back > img {
+.header > .header-box > .title > .back > img {
   width: 100%;
   height: 100%;
 }
-.header>.header-box > .tab-choose {
+.header > .header-box > .tab-choose {
   width: 100%;
   height: 0.78rem;
   background: #fff;
@@ -77,7 +91,7 @@ export default {
   border-top: 0.01rem solid #999;
   border-bottom: 0.01rem solid #999;
 }
-.header>.header-box > .tab-choose > .item {
+.header > .header-box > .tab-choose > .item {
   flex: 1;
   line-height: 0.78rem;
   font-family: \\9ed1\4f53;
@@ -86,10 +100,10 @@ export default {
   margin-right: 0.12rem;
   text-align: center;
 }
-.header>.header-box > .tab-choose > .left {
+.header > .header-box > .tab-choose > .left {
   color: #9b885f;
 }
-.header>.header-box > .tab-choose > .left > i {
+.header > .header-box > .tab-choose > .left > i {
   color: #333;
 }
 </style>
