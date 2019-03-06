@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Login-com v-if="tokenFlag"/>
+        <Login-com v-if="!tokenFlag"/>
         <MyHomePage-com v-else if="tokenFlag"/>
     </div>
 </template>

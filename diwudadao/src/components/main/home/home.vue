@@ -12,7 +12,7 @@
         <Artical-com :articalList="articalothersads.ads_info"/>
       </div>
     </div>
-    <div class="toTop">
+    <div class="toTop" v-show="flagtop">
       <span class="iconfont" @click="handleToTop()">&#xe61c;</span>
     </div>
   </div>
@@ -20,13 +20,6 @@
 
 <script>
 import Vuex from "vuex";
-// import Input from "./components/input";
-// import Banner from "./components/banner";
-// import FunNav from "./components/funNav";
-// import Recommend from "./components/recommend";
-// import Content from "./components/content";
-// import Artical from "./components/articallist";
-// import FlashSales from "./components/flashSales";
 
 import BScroll from "better-scroll";
 export default {
@@ -34,7 +27,8 @@ export default {
     return {
       page: 1,
       flag1: false,
-      flag2: false
+      flag2: false,
+      flagtop: false
     };
   },
   components: {
@@ -72,34 +66,25 @@ export default {
   },
   watch:{
     articalothersads(newVal,oldVal){
-      console.log(newVal,oldVal)
       this.onScroll.refresh();
       this.onScroll.finishPullUp();
+      if(this.articalothersads){
+        this.flag2=1
+        }
     },
     articlelist(){
         if(this.articlelist){
-          console.log(true)
         this.flag1=true
         }
-        console.log(200)
     },
-     articalothersads(){
-        if(this.articalothersads){
-        this.flag2=1
-        }
-        console.log(200)
-    }
   },
   mounted() {
     let that = this;
-    console.log(this.articlelist)
-    console.log(this)
-    console.log(this.articlelist)
     this.$nextTick(() => {
       this.onScroll = new BScroll(this.$refs.homewrapper, {
         click: true,
         tap:true,
-        probeType: 2,
+        probeType: 2, // 时刻监听scroll事件
         //下拉刷新：可以配置顶部下拉的距离（threshold） 来决定刷新时机以及回弹停留的距离（stop）
         //这个配置用于做上拉加载功能，默认为 false。当设置为 true 或者是一个 Object 的时候，可以开启上拉加载
         pullUpLoad: {
@@ -108,7 +93,6 @@ export default {
         useTransition: false // 防止iphone微信滑动卡顿
       });
       this.onScroll.on("pullingUp", function() {
-        console.log(this)
         this.pullupMsg = '加载中。。。';
         setTimeout(()=>{
           that.handleDateHomeArticalAds({ page: that.homePage });
@@ -117,6 +101,13 @@ export default {
                 that.pullupMsg = '加载更多';
             })
         },3000)
+      });
+      this.onScroll.on("scroll",()=>{
+        if(this.onScroll.y <-300){
+          this.flagtop = true;
+        }else if(this.onScroll.y >-300){
+            this.flagtop = false;
+          }
       })
       this.handleToTop(); // 回到顶部
     });

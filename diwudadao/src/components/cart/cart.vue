@@ -7,8 +7,8 @@
       <div class="title">购物车（{{SumCount}}）</div>
       <div class="right">编辑</div>
     </div>
-    
-    <div class="wrapper content" ref="wrapperCart">
+
+    <div class="wrapper content" ref="wrapperCart" v-if="SumCount">
       <div class="shop-list content">
         <div class="shop" v-for="(item,index) in list">
           <div v-for="prop of item" class="prop-list">
@@ -49,7 +49,9 @@
         </div>
       </div>
     </div>
-
+    <div v-if="!SumCount " class="empty">
+      购物车是空的，请登录购买
+    </div>
     <div class="footer">
       <div class="checkedInput">
         <mt-checklist v-model="value" :options="['全选']"></mt-checklist>
@@ -72,7 +74,7 @@
 <script>
 import { Checklist } from "mint-ui";
 import Cookie from "js-cookie";
-import BScroll from 'better-scroll'
+import BScroll from "better-scroll";
 import "./cart.scss";
 export default {
   data() {
@@ -80,11 +82,6 @@ export default {
       count: 1,
       value: [1],
       num: 1,
-      shop: "",
-      img: "",
-      name: "",
-      color: "",
-      size: "",
       list: [],
       sum: 0, //商品总数
       numPrice: 0, //总价格
@@ -93,27 +90,34 @@ export default {
   },
   computed: {
     SumCount: function() {
-      var cookie = JSON.parse(Cookie.get("cart"));
-      this.list = cookie;
-      this.sum = 0
-      this.list.map((item, index) => {
-      var name = Object.getOwnPropertyNames(item)[0];
-      var obj = item[name];
-      obj.map((goods, index) => {
-        this.sum = this.sum + parseInt(goods.num);
-        this.numPrice = this.numPrice + parseInt(goods.num * goods.price);
-      });
-    });
-      return this.sum;
+      var text = Cookie.get("cart");
+      if (text) {
+        var cookie = JSON.parse(text);
+        this.list = cookie;
+        this.sum = 0;
+        this.list.map((item, index) => {
+          var name = Object.getOwnPropertyNames(item)[0];
+          var obj = item[name];
+          obj.map((goods, index) => {
+            this.sum = this.sum + parseInt(goods.num);
+            this.numPrice = this.numPrice + parseInt(goods.num * goods.price);
+          });
+        });
+        return this.sum;
+      }else{
+        return 0;
+      }
     },
     SumPrice: function() {
       return this.numPrice;
     }
   },
   mounted() {
-    let scroll = new BScroll(this.$refs.wrapperCart,{
-      click:true
-    })
+    if(this.SumCount){
+      let scroll = new BScroll(this.$refs.wrapperCart, {
+        click: true
+      });
+    }
   },
   methods: {
     handleReduce(obj) {
@@ -132,10 +136,8 @@ export default {
       }
       Cookie.set("cart", this.list);
     },
-    handleOperate() {
-
-    },
-    handleBack(){
+    handleOperate() {},
+    handleBack() {
       this.$router.back();
     }
   }
@@ -147,6 +149,12 @@ export default {
   font-family: PingFang SC, STHeiTisc-Light, Helvetice-Light, arial, sans-serif;
   background: #f2f2f2;
   height: 100%;
+}
+.empty{
+  height: 3rem;
+  text-align: center;
+  line-height: 3rem;
+  font-size: .4rem;
 }
 .header {
   height: 1rem;
@@ -168,7 +176,7 @@ export default {
 #cart .mint-header-title {
   font-family: \\9ed1\4f53;
 }
-.wrapper{
+.wrapper {
   height: 83%;
 }
 .wrapper > .shop-list {

@@ -29,6 +29,7 @@
 import { Field } from "mint-ui";
 import "mint-ui/";
 import Vuex from "vuex"
+import "./registerlogin.scss"
 export default {
   data() {
     return {

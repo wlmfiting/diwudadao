@@ -2,9 +2,9 @@
     <div class="banner">
         <div class="swiper-container" ref="homeContainer">
             <div class="swiper-wrapper">
-                <router-link :to="item.slide_url" class="swiper-slide" v-for="(item) in bannerList" :key='item.id'>
+                <a @click="handleChangePathTo(item.slide_url)" class="swiper-slide" v-for="(item) in bannerList" :key='item.id'>
                     <img :src="item.silde_original" alt="">
-                </router-link> 
+                </a> 
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -15,6 +15,7 @@
 import Vuex from "vuex"
 import "swiper/dist/css/swiper.css";
 import Swiper from "swiper";
+import obj from "../../../../common/js/common/pathchange.js"
 export default {
     
     computed: {
@@ -36,6 +37,11 @@ export default {
                 // disableOnInteraction: false,
             },
         });
+    },
+    methods: {
+        handleChangePathTo(url){
+            obj.handleClickTo(url,"",this)
+        }
     },
 }
 </script>

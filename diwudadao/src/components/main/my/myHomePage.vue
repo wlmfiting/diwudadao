@@ -1,8 +1,8 @@
 <template>
   <div id="#myhome">
-    <div class="flux_m">
-      <div class="f_lux">
-        <div class="info">
+    <div class="flux_m " >
+      <div class="f_lux wrapper" ref="mywrapper">
+        <div class="info content">
           <!---->
           <div class="infotitle">
             <div class="info_top">
@@ -178,7 +178,15 @@
 </template>
 
 <script>
-export default {};
+import BScroll from "better-scroll"
+export default {
+  mounted () {
+    let scroll = new BScroll(this.$refs.mywrapper,{
+      click:true
+    })
+    console.log(scroll)
+  }
+};
 </script>
 
 <style lang="" scoped>
@@ -193,12 +201,14 @@ export default {};
     left: 0;
     right: 0;
 }
+.wrapper{
+  height: 100%;
+}
 .info{
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
-  /* background: #ccc; */
   width: 100%;
   background: #f2f2f2;
 }

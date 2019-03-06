@@ -2,9 +2,10 @@
 const handleClickTo = (link, params,that)=> {  
     //   http://m.5lux.com/promote/special/3098  http://www.5lux.com/flagship/goods/140
     ///http://www.5lux.com/brand/detail/436cata_id=0
-    let newlink = link.replace(/^(http:\/\/m\.5lux\.com)|(http:\/\/www\.5lux\.com)/, "/api");
+    //http://mobile.5lux.com
+    let newlink = link.replace(/^(http:\/\/m\.5lux\.com)|(http:\/\/www\.5lux\.com)|(http:\/\/mobile\.5lux\.com)/, "/api");
     if (params) {
-      console.log(newlink + "?" + params)
+      // console.log(newlink + "?" + params)
       return that.$router.push(newlink + "?" + params);
      
     } else {

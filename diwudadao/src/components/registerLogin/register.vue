@@ -8,10 +8,10 @@
     </div>
     <div class="content" id="content">
       <div class="username-box input-box">
-        <mt-field placeholder="请输入用户名（至少输入四位，包括数字、字母、下划线）" type="text"  :state="stateuser" class="username" v-model="username" @blur.native.capture="userBlur($event)" width="90%"></mt-field>
+        <mt-field placeholder="请输入用户名" type="text"  :state="stateuser" class="username" v-model="username" @blur.native.capture="userBlur($event)" width="90%"></mt-field>
       </div>
       <div class="pwd-style input-box">
-        <mt-field placeholder="请输入密码（只能输入四位，包括数字、字母、下划线）" :type="type"  :state="statepwd" v-model="pwd" ref="pwd" @blur.native.capture="pwdBlur" class="pwd"></mt-field>
+        <mt-field placeholder="请输入密码" :type="type"  :state="statepwd" v-model="pwd" ref="pwd" @blur.native.capture="pwdBlur" class="pwd"></mt-field>
         <span class="iconfont look" @click="handleLookChange($event)">&#xe7b5;</span>
       </div>
       <div @click="handleRegisterClick()" ref="registerButton" :class="[{'registerButton':index == 0},'yeRegisterButton','commonRegisterButton']">注册</div>
@@ -31,6 +31,7 @@ import "mint-ui/";
 import Vuex from "vuex"
 import { Popup } from 'mint-ui';
 import axios from "axios"
+import "./registerlogin.scss"
 export default {
   data() {
     return {
@@ -153,7 +154,7 @@ export default {
 
 .register > .content > .input-box {
   height: 0.8rem;
-  margin: 0 0.8rem;
+  margin: 0 0.8rem 0 .5rem;
   position: relative;
   border-bottom: 1px solid rgb(134, 129, 129);
 }
@@ -170,7 +171,6 @@ export default {
   width: 100%;
 } 
 .register > .content > .pwd-style {
-  padding-top: 2.6%;
   position: relative;
   display: flex;
   align-items: center;

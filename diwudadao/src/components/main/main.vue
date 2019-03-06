@@ -12,7 +12,7 @@ export default {
         "Footer-com":Footer
     },
     created () {
-        
+        console.log(this.$route.meta.footerflag)
     }
 }
 </script>
