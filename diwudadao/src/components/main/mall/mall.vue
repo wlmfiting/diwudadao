@@ -9,6 +9,7 @@
 				<Swiper/>
 				<ButtonList/>
 				<Flag/>
+				<All/>
 				<Flag/>
 			</div>
 		</div>
@@ -23,6 +24,7 @@
 	import ButtonList from "./components/buttonList"
 	import Flag from "./components/flag"
 	import BScroll from "better-scroll";
+	import All from "./components/all";
 	export default {
 		
 		components: {
@@ -31,12 +33,14 @@
 			"Tabbar": Tabbar,
 			"ButtonList": ButtonList,
 			"Flag": Flag,
+			"All":All,
 		},
 		created() {
 			this.handleDateMallButton();
 			this.handleDateMallTabbar();
 			this.handleDateMallButtonList();
 			this.handleDateMallFlag();
+			this.handleDateMallAll();
 		},
 		methods: {
 			...Vuex.mapActions({
@@ -44,6 +48,7 @@
 				handleDateMallTabbar: "mall/handleDateMallTabbar",
 				handleDateMallButtonList: "mall/handleDateMallButtonList",
 				handleDateMallFlag: "mall/handleDateMallFlag",
+				handleDateMallAll: "mall/handleDateMallAll",
 			})
 		},
 		
@@ -51,7 +56,6 @@
 			this.$nextTick(() => {
 				if(!this.scroll) {
 					this.scroll = new BScroll(this.$refs.mallwrapper, {})
-					console.log(this.scroll)
 				}
 			})
 		},

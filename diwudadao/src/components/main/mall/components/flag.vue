@@ -3,8 +3,16 @@
 		<div class="swiper-container flag-contation" ref="flagContainer">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide" v-for="(item,index) in mallFlag">
-					<img :src="item.img_url" alt="" />
-					<p class="p_text">{{item.title}}</p>
+					<div class="datu">
+						<img :src="item.img_url" alt="" />
+						<p class="p_text">{{item.title}}</p>
+					</div>
+					<div class="xiaotu">
+						<div v-for="(its,indexs) in item.store_infos" class="info">
+							<img :src="its.store_thumb" alt="" />
+							<!--<p class="p_text1">{{its.store_title}}</p>-->
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 如果需要分页器 -->
@@ -46,21 +54,27 @@
 <style scoped>
 	.swiper-container {
 		width: 100%;
-		height: 4.2rem;
+		height: 6.6rem;
 	}
 	
-	.swiper-wrapper {
+	.swiper-container>.swiper-wrapper {
 		width: 100%;
 		height: 100%;
 	}
 	
-	.swiper-slide>img {
+	.swiper-slide>.datu {
+		width: 100%;
+		height: 4.18rem;
+		position: relative;
+	}
+	
+	.swiper-slide>.datu>img {
 		width: 100%;
 		height: 100%;
 		position: relative;
 	}
 	
-	.swiper-slide>.p_text {
+	.swiper-slide>.datu>.p_text {
 		position: absolute;
 		left: 0;
 		bottom: 0;
@@ -70,6 +84,38 @@
 		font-size: .48rem;
 		color: #fff;
 		text-align: center;
+		background: -webkit-gradient(linear, 0 0, 0 bottom, from(transparent), to(rgba(0, 0, 0, .7)));
+	}
+	
+	.swiper-slide>.xiaotu {
+		width: 100%;
+		height: 2.42rem;
+		display: flex;
+	}
+	
+	.swiper-slide>.xiaotu>.info {
+		display: flex;
+	}
+	
+	.swiper-slide>.xiaotu>.info>img {
+		margin-left: .08rem;
+		width: 2.42rem;
+		height: 2.42rem;
+		text-align: center;
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	.swiper-slide>.xiaotu>.p_text1 {
+		display: flex;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		font-size: .26rem;
+		color: #fff;
+		width: 100%;
+		padding-bottom: .01rem;
+		padding-top: .64rem;
 		background: -webkit-gradient(linear, 0 0, 0 bottom, from(transparent), to(rgba(0, 0, 0, .7)));
 	}
 	

@@ -2,7 +2,7 @@
 	<div id="box">
 		<div class="swiper-container banner-contation" ref="bannerContainer">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide" v-for="(item,index) in bannerSlider">
+				<div class="swiper-slide" :to="item.slide_url" v-for="(item,index) in bannerSlider">
 					<img :src="item.silde_original" alt="" />
 				</div>
 			</div>

@@ -18,5 +18,9 @@ export default{
     async handleDateMallFlag({commit}){
     	let data = await handleMall.DateMallFlag();
     	commit("handleDateMallFlag",data.data);
-    }
+    },
+    async handleDateMallAll({commit}){
+    	let data = await handleMall.DateMallAll();
+    	commit("handleDateMallAll",data.data);
+    },
 }
