@@ -1,6 +1,9 @@
 <template>
   <div class="goods">
     <Banner-g :email='goodsbanner' />
+    <div class="back" @click="back()">
+        <img src="../../../assets/img/registerlogin/return.png" alt="">
+    </div>
     <div class="info">   
         <div  class="price">
             <div>￥<span>{{goodsprice.rank_price}}</span></div>
@@ -33,8 +36,8 @@
     </div>
     <div class="pay">
         <div class="pay1"><span class="iconfont">&#xe61d;</span>客服</div>
-        <div class="pay1"><span class="iconfont">&#xe613;</span>购物袋</div>
-        <div class="pay2 pay3">加入购物袋</div>
+        <div class="pay1" @click="handleToCart()"><span class="iconfont">&#xe613;</span>购物袋</div>
+        <div class="pay2 pay3" @click="handleAddToCart()">加入购物袋</div>
         <div class="pay2">立即购买</div>
     </div>
         <mt-popup v-model="flag1" position="bottom" class="installmentshow">
@@ -109,6 +112,7 @@
 import Vuex from 'vuex'
 import Banner from './goodinfo/banner'
 import Bscroll from "better-scroll";
+import Cookie from "js-cookie"
 export default {
     data () {
         return {
@@ -123,7 +127,8 @@ export default {
             sizeIndex:0,
             colorIndex:0,
             pay:'',
-            colorsize:'选择颜色/尺码'
+            colorsize:'选择颜色/尺码',
+            shop:""
         }
     },
     components:{
@@ -134,7 +139,7 @@ export default {
     },
     created() {
         this.handleGoodInfo(this.id)
-        
+        console.log(this.goodsprice)
     },
     methods: {
         ...Vuex.mapActions({
@@ -177,7 +182,59 @@ export default {
         handelchange(xx){
             this.pay=xx
              this.flag1=!this.flag1
+        },
+        handleAddToCart(){
+            var brand_ = this.brand_id;
+            var key = brand_;
+            if(Cookie.get("cart")){
+                var cart = Cookie.get("cart");
+                let arr=JSON.parse(cart)
+                var goods = {id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num};
+                
+                for(var j in arr){
+                    var keyValue = Object.getOwnPropertyNames(arr[j])[0];
+                    if( keyValue == brand_){  //店铺一样
+                        var arrValue = Object.getOwnPropertyDescriptor(arr[j],keyValue).value //数组
+                        for(var i in arrValue){
+                            if(arrValue[i].id === this.id){
+                                arrValue[i].num = parseInt(arrValue[i].num) +1;
+                                return;
+                            }
+                        }
+                        arrValue.push(goods)
+                        return ;
+                    }else{
+                        let brand = {key:[goods]}
+                        brand = {[key]:[goods]}
+                        arr.push(brand)
+                    }
+                }
+                console.log(Object.getOwnPropertyNames(arr[arr.length - 1])[0])
+                if(Object.getOwnPropertyNames(arr[arr.length - 1])[0] !== brand_){
+                    arr.push(brand) ; 
+                }
+                
+                
+                Cookie.set("cart",JSON.stringify(arr))
+                console.log(JSON.parse(Cookie.get("cart")))
+            }else{
+                //Object.getOwnPropertyNames(obj) = names   获取对象属性  返回一个数组
+                //Object.getOwnPropertyDescriptor（obj,names[i]）  获取属性值
+                //JSON.stringify([{brand_436:{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,color:this.color,size:this.size,num:this.num}}])
+                var brand = {key:[{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num}]}
+                brand = {[key]:[{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num}]}
+                Cookie.set("cart",JSON.stringify([brand]))
+                console.log(JSON.parse(Cookie.get("cart")))
+           }
+        },
+        handleToCart(){
+            this.$router.push("/cart?id="+this.id)
+            console.log(JSON.parse(Cookie.get("cart")))
+        },
+        back(){
+            this.$router.back();
         }
+
     },
     computed: {
         ...Vuex.mapState({
@@ -194,6 +251,9 @@ export default {
             goodsImg:state=>state.goods.goodsImg,
             goodsto0:state=>state.goods.goodsto0,
             goodsto1:state=>state.goods.goodsto1,
+            name:state=>state.goods.name,
+            mbpage_title:state=>state.goods.mbpage_title,
+            brand_id:state=>state.goods.brand_id
         })
     },
     mounted() {   
@@ -213,6 +273,7 @@ export default {
     },
     updated () {
         //console.log(2,this.goodAll)
+
     },
     watch: {
         goodsbanner(){
@@ -225,7 +286,13 @@ export default {
 }
 </script>
 <style lang="" scoped>
-    .goods{background: #f2f2f2;font-family: PingFang SC,STHeiTisc-Light,Helvetice-Light,arial,sans-serif;}
+    .goods{position: relative;background: #f2f2f2;font-family: PingFang SC,STHeiTisc-Light,Helvetice-Light,arial,sans-serif;}
+    .back{
+        position: fixed;
+        top: .5rem;
+        left: .4rem;
+        z-index: 1000;
+    }
     .info{padding: 0 .3rem;background: #fff;margin-bottom: .2rem;}
     .info>.price{display: flex;}
     .info>.price>div:nth-of-type(1){color: #9b885f;}

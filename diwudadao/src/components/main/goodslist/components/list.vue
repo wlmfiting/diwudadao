@@ -2,7 +2,7 @@
   <div class="list-wrapper" ref="goodslistWrapper">
     <ul class="content" v-if="list.length !== 0">
       <li class="goods" v-for="(item,index) in list" id="item.id">
-        <router-link :to="'/goodsInfo/'+item.good_id" class="toDetails">
+        <router-link :to="'/goodinfo/'+item.product_id" class="toDetails">
           <div class="imgBox">
           <img :src="item.big_thumb" alt>
         </div>

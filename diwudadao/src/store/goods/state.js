@@ -11,5 +11,8 @@ export default {
 	goodsparaarr:[],
 	goodsImg:'',
 	goodsto0:{},
-	goodsto1:{}
+	goodsto1:{},
+	name:"",
+	mbpage_title:"",
+	brand_id:""
 }

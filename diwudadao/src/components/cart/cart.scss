@@ -1,0 +1,40 @@
+#cart .mint-cell-wrapper{
+    padding: 0;
+}
+#cart .mint-checklist-label{
+    padding: 0
+}
+#cart .mint-cell:last-child{
+    width: .5rem;
+}
+#cart .mint-checkbox-core{
+    width: .44rem;
+    height: .44rem;
+    border:1px solid #7b7a7a;
+}
+#cart .mint-checkbox-input:checked + .mint-checkbox-core{
+    background-color: #9b885f;
+    border-color: #9b885f;
+}
+#cart .mint-checkbox-core::after{
+    top: .02rem;
+    left: .14rem;
+    width: .16rem;
+    height: .28rem;
+}
+#cart .mint-cell-wrapper{
+    background-repeat:repeat;
+    // font-size: 3rem; 
+    // line-height: 1; 
+}
+#cart .footer .mint-cell:last-child{
+    width: 1.4rem;
+}
+#cart .footer .mint-checkbox-label{
+    font-size: .28rem;
+    color: #333;
+    vertical-align: middle
+}
+#cart .footer .mint-checklist{
+    margin-left: .26rem;
+}

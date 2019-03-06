@@ -9,7 +9,7 @@
                     <img src="../../../../assets/img/home/5luxpc.png" alt="">
                 </div>
             </div>
-            <router-link to="" class="iconfont">&#xe613;</router-link>
+            <router-link to="/cart" class="iconfont">&#xe613;</router-link>
         </div>
     </div>
 </template>

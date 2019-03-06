@@ -3,7 +3,7 @@
             <div class="swiper-container" ref="GoodsContainer">
         <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="(item,index) in email">
-            <img :src="item.filepath" class="swiperimg">
+                <img :src="item.filepath" class="swiperimg">
             </div>
         </div>
         <div class="swiper-pagination swiper-p" ref="GoodsList"></div>
