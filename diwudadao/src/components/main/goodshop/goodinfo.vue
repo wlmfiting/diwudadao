@@ -184,51 +184,64 @@ export default {
              this.flag1=!this.flag1
         },
         handleAddToCart(){
-            var brand_ = this.brand_id;
-            var key = brand_;
-            if(Cookie.get("cart")){
-                var cart = Cookie.get("cart");
-                let arr=JSON.parse(cart)
+            let brand_ = this.brand_id;
+            let key = brand_;
+            var cart = Cookie.get("cart");
+            console.log(cart)
+            if(cookie){//cookie存在
+                let arr = JSON.parse(cart);//解析cookie
                 var goods = {id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num};
                 
-                for(var j in arr){
-                    var keyValue = Object.getOwnPropertyNames(arr[j])[0];
-                    if( keyValue == brand_){  //店铺一样
-                        var arrValue = Object.getOwnPropertyDescriptor(arr[j],keyValue).value //数组
-                        for(var i in arrValue){
-                            if(arrValue[i].id === this.id){
-                                arrValue[i].num = parseInt(arrValue[i].num) +1;
-                                return;
-                            }
-                        }
-                        arrValue.push(goods)
-                        return ;
-                    }else{
-                        let brand = {key:[goods]}
-                        brand = {[key]:[goods]}
-                        arr.push(brand)
-                    }
-                }
-                console.log(Object.getOwnPropertyNames(arr[arr.length - 1])[0])
-                if(Object.getOwnPropertyNames(arr[arr.length - 1])[0] !== brand_){
-                    arr.push(brand) ; 
-                }
+            }else{  //cookie不存在/
+
+            }
+
+
+        //     var brand_ = this.brand_id;
+        //     var key = brand_;
+        //     if(Cookie.get("cart")){
+        //         var cart = Cookie.get("cart");
+        //         let arr=JSON.parse(cart)
+        //         var goods = {id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num};
+                
+        //         for(var j in arr){
+        //             var keyValue = Object.getOwnPropertyNames(arr[j])[0];
+        //             if( keyValue == brand_){  //店铺一样
+        //                 var arrValue = Object.getOwnPropertyDescriptor(arr[j],keyValue).value //数组
+        //                 for(var i in arrValue){
+        //                     if(arrValue[i].id === this.id){
+        //                         arrValue[i].num = parseInt(arrValue[i].num) +1;
+        //                         return;
+        //                     }
+        //                 }
+        //                 arrValue.push(goods)
+        //                 return ;
+        //             }else{
+        //                 let brand = {key:[goods]}
+        //                 brand = {[key]:[goods]}
+        //                 arr.push(brand)
+        //             }
+        //         }
+        //         console.log(Object.getOwnPropertyNames(arr[arr.length - 1])[0])
+        //         if(Object.getOwnPropertyNames(arr[arr.length - 1])[0] !== brand_){
+        //             arr.push(brand) ; 
+        //         }
                 
                 
-                Cookie.set("cart",JSON.stringify(arr))
-                console.log(JSON.parse(Cookie.get("cart")))
-            }else{
-                //Object.getOwnPropertyNames(obj) = names   获取对象属性  返回一个数组
-                //Object.getOwnPropertyDescriptor（obj,names[i]）  获取属性值
-                //JSON.stringify([{brand_436:{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,color:this.color,size:this.size,num:this.num}}])
-                var brand = {key:[{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num}]}
-                brand = {[key]:[{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num}]}
-                Cookie.set("cart",JSON.stringify([brand]))
-                console.log(JSON.parse(Cookie.get("cart")))
-           }
+        //         Cookie.set("cart",JSON.stringify(arr))
+        //         console.log(JSON.parse(Cookie.get("cart")))
+        //     }else{
+        //         //Object.getOwnPropertyNames(obj) = names   获取对象属性  返回一个数组
+        //         //Object.getOwnPropertyDescriptor（obj,names[i]）  获取属性值
+        //         //JSON.stringify([{brand_436:{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,color:this.color,size:this.size,num:this.num}}])
+        //         var brand = {key:[{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num}]}
+        //         brand = {[key]:[{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num}]}
+        //         Cookie.set("cart",JSON.stringify([brand]))
+        //         console.log(JSON.parse(Cookie.get("cart")))
+        //    }
         },
         handleToCart(){
-            this.$router.push("/cart?id="+this.id)
+            this.$router.push("/cart")
             console.log(JSON.parse(Cookie.get("cart")))
         },
         back(){
