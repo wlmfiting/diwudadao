@@ -95,6 +95,7 @@ export default {
     SumCount: function() {
       var cookie = JSON.parse(Cookie.get("cart"));
       this.list = cookie;
+      console.log(this.list)
       this.sum = 0
       this.list.map((item, index) => {
       var name = Object.getOwnPropertyNames(item)[0];

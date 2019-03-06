@@ -38,7 +38,7 @@
         <div class="pay1"><span class="iconfont">&#xe61d;</span>客服</div>
         <div class="pay1" @click="handleToCart()"><span class="iconfont">&#xe613;</span>购物袋</div>
         <div class="pay2 pay3" @click="handleAddToCart()">加入购物袋</div>
-        <div class="pay2">立即购买</div>
+        <div class="pay2" @click="handleToCart()">立即购买</div>
     </div>
         <mt-popup v-model="flag1" position="bottom" class="installmentshow">
                 <div class="ment">
@@ -113,6 +113,7 @@ import Vuex from 'vuex'
 import Banner from './goodinfo/banner'
 import Bscroll from "better-scroll";
 import Cookie from "js-cookie"
+import { Toast } from 'mint-ui';
 export default {
     data () {
         return {
@@ -139,7 +140,7 @@ export default {
     },
     created() {
         this.handleGoodInfo(this.id)
-        console.log(this.goodsprice)
+       // console.log(this.goodsprice)
     },
     methods: {
         ...Vuex.mapActions({
@@ -156,6 +157,11 @@ export default {
         },
         handetogo4(){
              this.flag4=!this.flag4
+            // console.log(this.goodsto0.attr_val)
+            
+             this.color=this.goodsto0.attr_val[this.colorIndex].attr_value
+             this.size=this.goodsto1.attr_val[this.sizeIndex].attr_value
+            
              if(this.color&&this.size&&this.num){
                  this.colorsize="选择:颜色:"+this.color+"/大小:"+this.size+"/数量:"+this.num
              }
@@ -184,56 +190,68 @@ export default {
              this.flag1=!this.flag1
         },
         handleAddToCart(){
+            //  cartObj= {
+            //             shop:[{id:{name,id}},good2],
+            //             shop2:[good1,good3]
+            //         } 
             var brand_ = this.brand_id;
-            var key = brand_;
+            Toast({
+                message: '加入成功',
+                iconClass: 'iconfont icon-icon_mall-',
+                duration: 1500
+            });
+            var goods = {id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num};
             if(Cookie.get("cart")){
                 var cart = Cookie.get("cart");
-                let arr=JSON.parse(cart)
-                var goods = {id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num};
-                
-                for(var j in arr){
-                    var keyValue = Object.getOwnPropertyNames(arr[j])[0];
-                    if( keyValue == brand_){  //店铺一样
-                        var arrValue = Object.getOwnPropertyDescriptor(arr[j],keyValue).value //数组
-                        for(var i in arrValue){
-                            if(arrValue[i].id === this.id){
-                                arrValue[i].num = parseInt(arrValue[i].num) +1;
-                                return;
-                            }
+                var cartObj=JSON.parse(cart)
+                var flag=true
+                for(var shopkey in cartObj){
+                    if(shopkey==brand_&&flag){
+                        var shoparr=cartObj[shopkey]
+                        for(var i=0,len=shoparr.length;i<len;i++){  
+                                if(this.id in shoparr[i]){
+                                    shoparr[i][this.id].num=this.num
+                                    flag=false
+                                    break
+                                }  
                         }
-                        arrValue.push(goods)
-                        return ;
-                    }else{
-                        let brand = {key:[goods]}
-                        brand = {[key]:[goods]}
-                        arr.push(brand)
+                        if(flag){
+                            var obj={}
+                            obj[this.id]=goods
+                            shoparr.push(obj)
+                            flag=false
+                            break;
+                        }
                     }
                 }
-                console.log(Object.getOwnPropertyNames(arr[arr.length - 1])[0])
-                if(Object.getOwnPropertyNames(arr[arr.length - 1])[0] !== brand_){
-                    arr.push(brand) ; 
+                if(flag){
+                    var obj={}
+                    var arr=[]
+                    obj[this.id]=goods
+                    arr.push(obj)
+                    cartObj[brand_]=arr
                 }
-                
-                
-                Cookie.set("cart",JSON.stringify(arr))
-                console.log(JSON.parse(Cookie.get("cart")))
+                var cartstr=JSON.stringify(cartObj)
+                Cookie.set("cart",cartstr)
             }else{
-                //Object.getOwnPropertyNames(obj) = names   获取对象属性  返回一个数组
-                //Object.getOwnPropertyDescriptor（obj,names[i]）  获取属性值
-                //JSON.stringify([{brand_436:{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,color:this.color,size:this.size,num:this.num}}])
-                var brand = {key:[{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num}]}
-                brand = {[key]:[{id:this.id,shop:this.mbpage_title,img:this.goodsImg,name:this.name,price:this.goodsprice.rank_price,color:this.color,size:this.size,num:this.num}]}
-                Cookie.set("cart",JSON.stringify([brand]))
-                console.log(JSON.parse(Cookie.get("cart")))
-           }
+                var cartObj={}
+                var obj={}
+                var arr=[]
+                obj[this.id]=goods
+                arr.push(obj)
+                cartObj[brand_]=arr
+                //console.log(100,cartObj,goods,obj)
+                Cookie.set("cart",JSON.stringify(cartObj))
+            }
+        
         },
         handleToCart(){
-            this.$router.push("/cart?id="+this.id)
-            console.log(JSON.parse(Cookie.get("cart")))
+            //this.$router.push("/cart")
+            console.log(200,JSON.parse(Cookie.get("cart")))
         },
         back(){
             this.$router.back();
-        }
+        },
 
     },
     computed: {
@@ -340,4 +358,6 @@ export default {
     .readu{display: flex;}
     .readu>p{border: 1px solid #333;padding: .05rem .15rem}
     .readu>input{width: 1rem;margin: 0 .2rem;text-align: center;font-size: .3rem;}
+    .mint-toast>.mint-toast-icon{font-size: .4rem;}
+    .is-placemiddle,.mint-toast-text{width: 4rem !important;display: block;font-size: .4rem;}
 </style>
