@@ -230,7 +230,7 @@ export default {
                     obj[this.id]=goods
                     arr.push(obj)
                     cartObj[brand_]=arr
-                }
+                 }
                 var cartstr=JSON.stringify(cartObj)
                 Cookie.set("cart",cartstr)
             }else{
